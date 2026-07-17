@@ -1,0 +1,1382 @@
+﻿<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
+  <style>
+*{font-family:'DM Sans',sans-serif}
+.accent{color:#E8A838}
+.accent-bg{background-color:#E8A838}
+.nav-link{position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:#E8A838;transition:width 0.3s}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.project-card:hover .project-overlay{opacity:1}
+.project-overlay{opacity:0;transition:opacity 0.4s ease}
+.page-section{display:none;opacity:0;transition:opacity 0.4s ease}
+.page-section.active{display:block;opacity:1}
+html{scroll-behavior:smooth}
+.ticker-wrapper{overflow:hidden;width:100%}
+.ticker-track{display:flex;gap:3rem;width:max-content;animation:ticker 30s linear infinite}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-track:hover{animation-play-state:paused}
+.feature-carousel{overflow:hidden}
+.feature-track{display:flex;transition:transform 0.5s ease}
+.feature-slide{min-width:33.333%;padding:0 0.75rem}
+@media(max-width:1024px){.feature-slide{min-width:50%}}
+@media(max-width:640px){.feature-slide{min-width:100%}}
+.timeline-line{position:absolute;left:11px;top:0;bottom:0;width:2px;background:rgba(232,168,56,0.3)}
+.timeline-dot{width:24px;height:24px;border-radius:50%;border:2px solid #E8A838;background:#000;position:relative;z-index:1}
+.cert-card{transition:transform 0.3s,box-shadow 0.3s}
+.cert-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(232,168,56,0.1)}
+.phone-mockup{width:220px;height:440px;border-radius:28px;border:3px solid rgba(255,255,255,0.2);background:#111;overflow:hidden;position:relative;transition:transform 0.4s ease,box-shadow 0.4s ease;flex-shrink:0}
+.phone-mockup:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 60px rgba(232,168,56,0.15)}
+.phone-mockup img{width:100%;height:100%;object-fit:cover}
+.laptop-mockup{border-radius:12px;border:3px solid rgba(255,255,255,0.15);background:#111;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s}
+.laptop-mockup:hover{transform:scale(1.02);box-shadow:0 12px 40px rgba(232,168,56,0.1)}
+.process-step{text-align:center;flex:1;min-width:100px}
+.process-connector{width:40px;display:flex;align-items:center;justify-content:center;color:rgba(232,168,56,0.5)}
+.collab-logo{transition:transform 0.3s ease,opacity 0.3s ease;opacity:0.7}
+.collab-logo:hover{transform:scale(1.02);opacity:1}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px}
+.footer-icon{transition:transform 0.3s ease,opacity 0.3s ease;opacity:0.6}
+.footer-icon:hover{transform:translateY(-2px);opacity:1}
+.cat-pill{padding:0.5rem 1.25rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);font-size:0.875rem;font-weight:500;transition:all 0.3s;text-decoration:none}
+.cat-pill:hover,.cat-pill.active{color:#E8A838;border-color:#E8A838}
+.carousel-wrap{overflow:hidden;position:relative}
+.carousel-inner{display:flex;transition:transform 0.5s ease}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;transition:background 0.3s;z-index:10}
+.carousel-btn:hover{background:rgba(255,255,255,0.2)}
+.language-toggle{min-width:44px;padding:.42rem .7rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;transition:color .25s,border-color .25s,background .25s}.language-toggle:hover{color:#000;border-color:#E8A838;background:#E8A838}
+@media(max-width:768px){.phone-mockup{width:160px;height:320px}}
+.email-scroll-mockup{width:100%;max-width:410px;height:720px;margin:0 auto;overflow-y:auto;border-radius:18px;border:3px solid rgba(255,255,255,0.15);background:#111}
+.email-scroll-mockup img{width:100%;height:auto;display:block}
+.media-video{width:100%;height:100%;object-fit:cover;background:#111}
+.gallery-carousel{overflow:hidden;padding:0 18px}
+.gallery-track{display:flex;gap:1rem;width:100%;transition:transform .5s ease}
+.gallery-slide{flex:0 0 calc(50% - .5rem);min-width:0}
+.lightbox-media-wrap{width:min(90vw,1400px);height:min(85vh,900px);display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px}
+.lightbox .lightbox-media-wrap img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.lightbox-media-wrap.is-scrollable{display:block;overflow:auto}
+.lightbox .lightbox-media-wrap.is-scrollable img{width:100%;height:auto;max-width:100%;max-height:none}
+@media(max-width:640px){.gallery-slide{flex-basis:100%}}
+@media(max-width:640px){.email-scroll-mockup{max-width:340px;height:580px}}
+.case-media{margin:0 auto 4rem}.case-media-label{color:#E8A838;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1rem}.case-phone-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}.case-phone{position:relative;display:block;border-radius:22px;overflow:hidden;background:#111;border:2px solid rgba(255,255,255,.15);aspect-ratio:9/16}.case-phone video,.case-phone img{width:100%;height:100%;object-fit:cover}.case-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 55%)}.case-play i{display:flex;align-items:center;justify-content:center;width:52px!important;height:52px!important;padding:14px;border-radius:50%;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.6);color:white}.case-story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}.case-story{aspect-ratio:9/16;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:16px;background:transparent}.case-story img{width:100%;height:100%;object-fit:contain}.case-newsletter{height:520px;overflow-y:auto;border:2px solid rgba(255,255,255,.15);border-radius:18px;background:#111;cursor:zoom-in}.case-newsletter img{width:100%;height:auto;display:block}.case-print-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.case-print{aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#151515;cursor:zoom-in}.case-print.case-print-portrait{aspect-ratio:3/4}.case-print img,.case-wide video,.case-wide img{width:100%;height:100%;object-fit:cover}.case-wide{aspect-ratio:16/9;overflow:hidden;border-radius:20px;background:#111}.case-gallery-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.case-gallery-row img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:16px}.poster-mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.poster-mosaic img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}.poster-mosaic .poster-wide{grid-column:1/-1;aspect-ratio:16/7}.case-media-note{font-size:.75rem;color:rgba(255,255,255,.4);margin-top:.75rem}.case-next,.case-prev{position:fixed;top:50%;z-index:45;display:grid;gap:.15rem;padding:.8rem 1rem;border:1px solid rgba(255,255,255,.2);border-radius:16px;background:rgba(10,10,10,.88);backdrop-filter:blur(10px);color:#fff;font-size:.8rem;transition:transform .25s,background .25s}.case-next{right:1.25rem;text-align:right}.case-prev{left:1.25rem}.case-next:hover,.case-prev:hover{background:#E8A838;color:#000}.case-next:hover{transform:translateX(-4px)}.case-prev:hover{transform:translateX(4px)}.case-nav-project{font-size:.7rem;color:rgba(255,255,255,.6)}.case-next:hover .case-nav-project,.case-prev:hover .case-nav-project{color:rgba(0,0,0,.65)}@media(max-width:640px){.case-story-grid,.poster-mosaic,.case-gallery-row{grid-template-columns:repeat(2,1fr)}.case-print-grid{grid-template-columns:1fr}.case-newsletter{height:420px}.case-phone-grid{grid-template-columns:repeat(2,1fr)}.case-next{right:.75rem}.case-prev{left:.75rem}.case-nav-project{display:none}}
+.print-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:110px;grid-auto-flow:dense;gap:1rem}.print-tall{grid-column:span 2;grid-row:span 3}.print-wide{grid-column:span 3;grid-row:span 2}.print-medium{grid-column:span 2;grid-row:span 2}.print-full{grid-column:1/-1;grid-row:span 3}.print-mosaic>div{min-width:0}.print-mosaic img{width:100%;height:100%;object-fit:cover;display:block}@media(max-width:768px){.print-mosaic{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}.print-tall,.print-wide,.print-medium{grid-column:span 1;grid-row:span 2}.print-full{grid-column:1/-1;grid-row:span 2}}
+.print-editorial{display:grid;gap:1.5rem}.print-editorial img{display:block;width:100%;height:100%;object-fit:cover}.print-top-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}.print-top-row>div{aspect-ratio:3/4}.print-feature-row{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1.5rem;align-items:stretch}.print-feature-main{aspect-ratio:3/4}.print-feature-stack{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:1.5rem;min-height:0}.print-feature-stack>div{min-height:0}.print-wide-row{aspect-ratio:4/3}.print-bottom-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.print-bottom-row>div{aspect-ratio:3/4}@media(max-width:768px){.print-top-row,.print-bottom-row{grid-template-columns:1fr}.print-feature-row{grid-template-columns:1fr}.print-feature-stack>div{aspect-ratio:4/3}.print-wide-row{aspect-ratio:auto}.print-wide-row img{height:auto;object-fit:contain}}
+.radio-reels-wide{display:grid;grid-template-columns:repeat(2,minmax(0,360px));justify-content:center;gap:1.5rem}.radio-reel-wide{position:relative;display:block;width:100%;aspect-ratio:3/5;border-radius:22px;overflow:hidden;background:#111;border:2px solid rgba(255,255,255,.15)}.radio-reel-wide img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .45s ease}.radio-reel-wide:hover img{transform:scale(1.035)}.radio-reel-wide .case-play{background:linear-gradient(0deg,rgba(0,0,0,.38),transparent 65%)}@media(max-width:640px){.radio-reels-wide{grid-template-columns:minmax(0,320px)}.radio-reel-wide{aspect-ratio:3/5}}
+.case-video-carousel{position:relative;padding:0 3.5rem}.case-video-viewport{overflow:hidden}.case-video-track{display:flex;transition:transform .5s ease}.case-video-slide{flex:0 0 33.333333%;min-width:0;padding:0 .65rem}.case-video-slide .case-phone{width:100%}.case-video-carousel .carousel-btn.left-2{left:.4rem}.case-video-carousel .carousel-btn.right-2{right:.4rem}@media(max-width:768px){.case-video-carousel{padding:0 3rem}.case-video-slide{flex-basis:100%;padding:0 .45rem}.case-video-slide .case-phone{width:min(100%,280px);margin:0 auto}}
+.luna-newsletter-wrap{position:relative}.case-newsletter.luna-newsletter{height:624px}.luna-scroll-hint{position:absolute;right:16px;top:50%;z-index:3;display:inline-flex;align-items:center;gap:.4rem;transform:translateY(-50%);padding:.65rem .85rem;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(0,0,0,.78);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px);pointer-events:none;transition:opacity .25s ease}@media(max-width:640px){.case-newsletter.luna-newsletter{height:504px}.luna-scroll-hint{right:10px;padding:.55rem .7rem;font-size:.62rem}}
+.reaco-social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.reaco-social-item{aspect-ratio:16/10;overflow:hidden;border-radius:16px;background:#151515;cursor:zoom-in}.reaco-social-item img{width:100%;height:100%;object-fit:cover}.reaco-instagram-card{position:relative;display:block;width:min(100%,560px);aspect-ratio:1;margin:0 auto;overflow:hidden;border-radius:22px;background:#151515;border:1px solid rgba(255,255,255,.15)}.reaco-instagram-card img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.reaco-instagram-card:hover img{transform:scale(1.035)}.reaco-instagram-link{position:absolute;right:1rem;bottom:1rem;display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1rem;border-radius:999px;background:rgba(0,0,0,.78);color:#fff;font-size:.8rem;font-weight:600}.reaco-campus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.reaco-campus-large{grid-column:1/-1;aspect-ratio:16/8}.reaco-campus-small{aspect-ratio:16/10}.reaco-campus-single{grid-column:1/-1;width:calc(50% - .5rem);justify-self:center}.reaco-campus-large,.reaco-campus-small{overflow:hidden;border-radius:18px;background:#151515;cursor:zoom-in}.reaco-campus-grid img{width:100%;height:100%;object-fit:cover}.reaco-rollups,.reaco-posters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.reaco-rollup{aspect-ratio:2/3}.reaco-poster{aspect-ratio:3/4}.reaco-rollup,.reaco-poster{overflow:hidden;border-radius:18px;background:#151515;cursor:zoom-in}.reaco-rollup img,.reaco-poster img{width:100%;height:100%;object-fit:cover}@media(max-width:640px){.reaco-social-grid,.reaco-campus-grid,.reaco-rollups,.reaco-posters{grid-template-columns:1fr}.reaco-campus-large{grid-column:auto}.reaco-campus-single{grid-column:auto;width:100%}.reaco-instagram-card{width:100%}}
+.other-project-block+.other-project-block{margin-top:3.5rem}.other-small-grid,.other-charity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.other-sanary-grid{position:relative;left:50%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;width:min(1200px,calc(100vw - 48px));transform:translateX(-50%)}.other-book{aspect-ratio:16/9}.other-small-grid{width:100%;margin:0 auto}.other-small,.other-charity{aspect-ratio:16/10}.other-sanary{aspect-ratio:3/4}.other-bouillon{aspect-ratio:16/8}.other-lost-wide{overflow:hidden;border-radius:18px;background:#151515;cursor:zoom-in}.other-lost-wide img{display:block;width:100%;height:auto;object-fit:contain}.other-book,.other-small,.other-sanary,.other-bouillon,.other-charity{overflow:hidden;border-radius:18px;background:#151515;cursor:zoom-in}.other-project-block img{width:100%;height:100%;object-fit:cover}.other-project-block .other-lost-wide img{height:auto;object-fit:contain}.other-book img{object-fit:contain}@media(max-width:640px){.other-small-grid,.other-charity-grid,.other-sanary-grid{grid-template-columns:1fr}.other-sanary-grid{left:auto;width:100%;transform:none}.other-small-grid{width:100%}.other-project-block+.other-project-block{margin-top:2.75rem}.other-book,.other-bouillon{aspect-ratio:4/3}}
+</style>
+ </head>
+ <body data-template-id="__page-root" class="w-full min-h-screen bg-black text-white" style="background: rgb(0, 0, 0);">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#home" data-template-id="nav-logo" class="canva-text text-xl font-bold tracking-tight" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 20px;">YULIIA DIACHENKO</a>
+    <div class="hidden md:flex items-center gap-8">
+     <a href="#home" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">Home</a> <a href="#about" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">About</a> <a href="#social" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">Social Media</a> <a href="#strategy" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">Strategy</a> <a href="#graphic" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">Graphic Design</a> <a href="#contact" class="nav-link text-sm tracking-wide text-white/80 hover:text-white transition" data-nav="">Contact</a>
+     <button type="button" class="language-toggle" data-language-toggle aria-label="Passer au français">EN</button>
+    </div><div class="flex items-center gap-3 md:hidden"><button type="button" class="language-toggle" data-language-toggle aria-label="Passer au français">EN</button><button id="mobile-menu-btn" class="text-white"><i data-lucide="menu" style="width:24px;height:24px"></i></button></div>
+   </div>
+   <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3">
+    <a href="#home" class="text-sm text-white/80" data-nav="">Home</a> <a href="#about" class="text-sm text-white/80" data-nav="">About</a> <a href="#social" class="text-sm text-white/80" data-nav="">Social Media</a> <a href="#strategy" class="text-sm text-white/80" data-nav="">Strategy</a> <a href="#graphic" class="text-sm text-white/80" data-nav="">Graphic Design</a> <a href="#contact" class="text-sm text-white/80" data-nav="">Contact</a>
+   </div>
+  </nav><!-- HOME -->
+  <section id="page-home" class="page-section active pt-20">
+   <div class="relative w-full" style="min-height:calc(90 * min(var(--vh,1vh),1vh))">
+    <div class="absolute inset-0 overflow-hidden">
+     <img data-template-id="hero-bg-image" class="canva-image w-full h-full object-cover opacity-30" loading="lazy" src="canva://MAE-YkwrOws/1" alt="Minimalist abstract pattern with overlapping geometric shapes in black and white">
+    </div>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center px-6" style="min-height:calc(90 * min(var(--vh,1vh),1vh))">
+     <h1 data-template-id="hero-title" class="canva-text text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-6" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">YULIIA DIACHENKO</h1>
+     <p data-template-id="hero-subtitle" class="canva-text text-lg md:text-xl text-white/60 max-w-xl mb-10" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 20px; letter-spacing: 0.133rem;">SOCIAL MEDIA • GRAPHIC DESIGN • VIDEO PRODUCTION • BRANDING • CONTENT CREATION</p><a href="#social" data-template-id="hero-cta" class="canva-button inline-block px-8 py-4 font-semibold text-black rounded-full transition hover:scale-105" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">View Portfolio</a>
+    </div>
+   </div><!-- Portfolio Grid -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="portfolio-heading" class="canva-text text-3xl md:text-4xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Featured Work</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+     <a href="#case-radio" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-1-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="canva://MAHOtwjzCcQ/1" alt="Studio microphone with pop filter for recording audio">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-1-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Radio Campus Orléans</p>
+      </div></a> <a href="#case-breathing" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-2-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="canva://MAGOZSfAyyo/1" alt="Woman practicing meditation with candles and incense">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-2-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Breathing Academy</p>
+      </div></a> <a href="#case-reaco" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-3-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="canva://MAGT62e40UY/1" alt="Cinematic scene with cameraman setting up professional video equipment">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-3-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">UnivArena</p>
+      </div></a> <a href="#case-luna" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-4-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="canva://MAHOiTEfZOs/1" alt="Restaurant interior with elegant table settings">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-4-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Luna Rossa</p>
+      </div></a> <a href="#case-poster" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-5-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="media/home-featured-poster.png" alt="Poster Design featured project">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-5-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Poster Design</p>
+      </div></a> <a href="#case-other" class="project-card relative overflow-hidden rounded-xl aspect-[4/3] group cursor-pointer block"> <img data-template-id="project-6-img" class="canva-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" src="https://images.pexels.com/photos/31726562/pexels-photo-31726562.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A sleek camera on a contemporary minimalist desk">
+      <div class="project-overlay absolute inset-0 bg-black/70 flex items-end p-6">
+       <p data-template-id="project-6-title" class="canva-text font-bold text-lg" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">Other Creative Projects</p>
+      </div></a>
+    </div>
+   </div><!-- Tools Ticker -->
+   <div class="py-12 border-y border-white/10 fade-in">
+    <div class="ticker-wrapper">
+     <div class="ticker-track">
+      <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Premiere Pro</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe After Effects</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Photoshop</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Illustrator</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Lightroom</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Figma</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">WordPress</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Notion</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Mailchimp</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Mailjet</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Premiere Pro</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe After Effects</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Photoshop</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Illustrator</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Adobe Lightroom</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Figma</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">WordPress</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Notion</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Mailchimp</span> <span class="text-white/70 font-semibold text-sm whitespace-nowrap px-4 py-2 border border-white/10 rounded-full">Mailjet</span>
+     </div>
+    </div>
+   </div><!-- Services shortcuts -->
+   <section class="max-w-6xl mx-auto px-6 py-24 fade-in" aria-label="Portfolio categories">
+    <div class="grid md:grid-cols-2 gap-6">
+     <a href="#social" class="group relative min-h-[420px] overflow-hidden rounded-2xl border border-white/10 block">
+      <img data-template-id="home-category-social-img" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1400&q=85" alt="Social media content on a phone screen">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10"></div>
+      <div class="absolute inset-x-0 bottom-0 p-8 md:p-10">
+       <h2 class="text-3xl md:text-4xl font-bold mb-3">Social Media</h2>
+       <p class="text-white/70 max-w-md mb-6">Content creation, community management and social-media campaigns.</p>
+       <span class="inline-flex items-center gap-2 font-semibold accent group-hover:gap-3 transition-all">Explore work <i data-lucide="arrow-up-right" style="width:19px;height:19px"></i></span>
+      </div>
+     </a>
+     <a href="#graphic" class="group relative min-h-[420px] overflow-hidden rounded-2xl border border-white/10 block">
+      <img data-template-id="home-category-graphic-img" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1400&q=85" alt="Graphic design materials on a desk">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10"></div>
+      <div class="absolute inset-x-0 bottom-0 p-8 md:p-10">
+       <h2 class="text-3xl md:text-4xl font-bold mb-3">Graphic Design</h2>
+       <p class="text-white/70 max-w-md mb-6">Brand identity, editorial layouts, posters and print design.</p>
+       <span class="inline-flex items-center gap-2 font-semibold accent group-hover:gap-3 transition-all">Explore work <i data-lucide="arrow-up-right" style="width:19px;height:19px"></i></span>
+      </div>
+     </a>
+    </div>
+   </section><!-- Why Work With Me -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="why-heading" class="canva-text text-3xl md:text-4xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Why Work With Me</h2>
+    <div class="relative">
+     <div class="feature-carousel" id="feature-carousel">
+      <div class="feature-track" id="feature-track">
+       <div class="feature-slide">
+        <div data-template-id="feature-card-1" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="megaphone" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-1-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Strategic Communication</h3>
+         <p data-template-id="feature-1-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Creating communication strategies that align with business goals and audience needs.</p>
+        </div>
+       </div>
+       <div class="feature-slide">
+        <div data-template-id="feature-card-2" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="palette" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-2-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Visual Storytelling</h3>
+         <p data-template-id="feature-2-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Designing impactful visual content that communicates clear messages.</p>
+        </div>
+       </div>
+       <div class="feature-slide">
+        <div data-template-id="feature-card-3" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="share-2" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-3-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Social Media Management</h3>
+         <p data-template-id="feature-3-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Managing social media platforms with engaging content and consistent branding.</p>
+        </div>
+       </div>
+       <div class="feature-slide">
+        <div data-template-id="feature-card-4" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="video" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-4-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Multimedia Production</h3>
+         <p data-template-id="feature-4-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Producing professional photography, video, motion graphics, and digital content.</p>
+        </div>
+       </div>
+       <div class="feature-slide">
+        <div data-template-id="feature-card-5" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="fingerprint" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-5-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Brand Identity</h3>
+         <p data-template-id="feature-5-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Maintaining cohesive branding across digital and print communication.</p>
+        </div>
+       </div>
+       <div class="feature-slide">
+        <div data-template-id="feature-card-6" class="canva-card p-8 rounded-2xl border border-white/10 text-center h-full transition-transform duration-300 hover:scale-[1.03]" style="background: rgb(10, 10, 10);">
+         <div class="w-12 h-12 mx-auto mb-5 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="clipboard-list" style="width:24px;height:24px" class="text-amber-400"></i>
+         </div>
+         <h3 data-template-id="feature-6-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 18px;">Project Management</h3>
+         <p data-template-id="feature-6-desc" class="canva-text text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Planning, coordinating, and delivering communication projects from concept to execution.</p>
+        </div>
+       </div>
+      </div>
+     </div><button id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+    </div>
+   </div><!-- About shortcut -->
+   <section class="max-w-6xl mx-auto px-6 pb-24 fade-in" aria-label="About me">
+    <a href="#about" class="group relative flex min-h-[440px] items-end overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-10">
+     <img data-template-id="about-workspace-img" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85" alt="Creative professional at work">
+     <div data-template-id="about-workspace-overlay" class="absolute inset-0 bg-black/20 transition-colors duration-300"></div>
+     <div class="relative grid w-full gap-6 md:grid-cols-[1fr_auto] md:items-end">
+      <div class="max-w-2xl">
+       <p class="text-sm uppercase tracking-[0.22em] accent mb-4">Behind the work</p>
+       <h2 class="text-4xl md:text-6xl font-black tracking-tight mb-4">The person behind<br>the creative work.</h2>
+       <p class="text-white/75 leading-relaxed max-w-xl">Discover my background, creative approach and the values I bring to every project.</p>
+      </div>
+      <span class="inline-flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition group-hover:scale-110 group-hover:bg-[#E8A838] group-hover:text-black"><i data-lucide="arrow-up-right" style="width:28px;height:28px"></i></span>
+     </div>
+    </a>
+   </section><!-- CTA -->
+   <div class="text-center py-28 px-6 fade-in">
+    <p class="mb-5 text-sm font-semibold uppercase tracking-[0.24em] accent">Good design catches attention.</p>
+    <h2 data-template-id="cta-heading" class="canva-text mx-auto mb-6 max-w-4xl text-4xl font-bold leading-tight md:text-6xl" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal;">Great communication builds connection.</h2>
+    <p class="text-white/60 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">If you've enjoyed exploring my portfolio and connected with the way I think, create, and communicate, I'd love to hear about your project.</p>
+    <div class="flex justify-center"><a href="#contact" data-template-id="cta-button" class="canva-button inline-block px-10 py-5 font-semibold text-black rounded-full hover:scale-105 transition text-lg" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Get In Touch</a>
+    </div>
+   </div><!-- Footer -->
+   <footer class="border-t border-white/10 py-12 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+     <p data-template-id="footer-copyright" class="canva-text text-white/40 text-sm"></p>
+     <div class="flex gap-6 items-center">
+      <a href="https://www.tiktok.com/@wavecurl.y" target="_blank" rel="noopener noreferrer" class="footer-icon text-white/60 hover:text-white transition" aria-label="TikTok">
+       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+       </svg></a> <a href="https://www.linkedin.com/in/yuliia-diachenko/?locale=fr-FR" target="_blank" rel="noopener noreferrer" class="footer-icon text-white/60 hover:text-white transition" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:20px;height:20px"></i></a> <a href="media/CV-Yuliia-Diachenko.pdf.pdf" target="_blank" class="footer-icon text-white/60 hover:text-white transition flex items-center gap-1" aria-label="Download CV"><i data-lucide="download" style="width:20px;height:20px"></i></a>
+     </div>
+    </div>
+   </footer>
+  </section><!-- ABOUT -->
+  <section id="page-about" class="page-section pt-20">
+   <div class="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center fade-in">
+    <div><img data-template-id="about-photo" class="canva-image w-full aspect-[3/4] object-cover rounded-2xl" loading="lazy" src="media/about-portrait.png" alt="Yuliia Diachenko portrait">
+    </div>
+    <div>
+     <h1 data-template-id="about-heading" class="canva-text text-3xl md:text-4xl font-bold mb-6" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 32px;">About Me</h1>
+     <p data-template-id="about-text" class="canva-text whitespace-pre-line text-white/60 leading-relaxed mb-4" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">I am a Digital Communication Specialist with an international academic background and professional experience in social media management, visual communication, graphic design, video production, and content creation.
+
+My background in Business Economics helps me understand analytics, audience behavior, and the performance of digital campaigns. My studies in Digital Communication have strengthened my creative approach to visual storytelling and strategic communication.</p>
+     <p data-template-id="about-text-2" class="canva-text whitespace-pre-line text-white/60 leading-relaxed mb-8" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">In France, I have worked on communication projects in the well-being and health, cultural organizations, media, radio, local businesses, and eSports sectors. These experiences have taught me to adapt my communication style to different audiences while creating clear, engaging, and visually consistent content.
+
+I enjoy combining creativity with analytical thinking to develop communication that is both visually engaging and strategically effective.</p><div class="flex flex-wrap gap-3"><a href="https://www.linkedin.com/in/yuliia-diachenko/?locale=fr-FR" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-amber-400 hover:text-amber-400 transition">LinkedIn</a><a href="https://www.tiktok.com/@wavecurl.y" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-amber-400 hover:text-amber-400 transition">TikTok</a><a href="media/CV-Yuliia-Diachenko.pdf.pdf" target="_blank" class="px-5 py-3 rounded-full bg-amber-400 text-black font-semibold hover:scale-105 transition">Download CV</a></div>
+    </div>
+   </div>
+   <div class="max-w-3xl mx-auto px-6 py-20 fade-in">
+    <h2 data-template-id="education-heading" class="canva-text text-3xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Education</h2>
+    <div class="relative pl-10">
+     <div class="timeline-line"></div>
+     <div class="mb-12 relative">
+      <div class="timeline-dot absolute -left-10 top-1"></div>
+      <p data-template-id="edu-1-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2025–2026</p>
+      <h3 data-template-id="edu-1-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Orléans</h3>
+      <p data-template-id="edu-1-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">French Language Certification</p>
+      <p data-template-id="edu-1-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">DELF B2</p>
+     </div>
+     <div class="mb-12 relative">
+      <div class="timeline-dot absolute -left-10 top-1"></div>
+      <p data-template-id="edu-2-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2022–2024</p>
+      <h3 data-template-id="edu-2-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Toulon</h3>
+      <p data-template-id="edu-2-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2
+Digital &amp; Editorial Communication</p>
+     </div>
+     <div class="mb-12 relative">
+      <div class="timeline-dot absolute -left-10 top-1"></div>
+      <p data-template-id="edu-3-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2021–2023</p>
+      <h3 data-template-id="edu-3-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Toulon</h3>
+      <p data-template-id="edu-3-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2 (Second year completed remotely while living in France)</p>
+      <p data-template-id="edu-3-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Advertising &amp; Public Relations</p>
+     </div>
+     <div class="relative">
+      <div class="timeline-dot absolute -left-10 top-1"></div>
+      <p data-template-id="edu-4-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2017–2021</p>
+      <h3 data-template-id="edu-4-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">National University of Dnipro</h3>
+      <p data-template-id="edu-4-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Bachelor's Degree</p>
+      <p data-template-id="edu-4-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Business Economics</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-5xl mx-auto px-6 py-20 fade-in">
+    <h2 data-template-id="certificates-heading" class="canva-text text-3xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Certificates</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <div data-template-id="cert-card-1" class="canva-card cert-card p-6 rounded-2xl border border-white/10" style="background: rgb(10, 10, 10);">
+      <h3 data-template-id="cert-1-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Fundamentals of Digital Marketing</h3>
+      <p data-template-id="cert-1-org" class="canva-text text-white/60 text-sm mb-1" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Google Digital Garage</p>
+      <p data-template-id="cert-1-year" class="canva-text text-sm" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2026</p>
+     </div>
+     <div data-template-id="cert-card-2" class="canva-card cert-card p-6 rounded-2xl border border-white/10" style="background: rgb(10, 10, 10);">
+      <h3 data-template-id="cert-2-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">DELF B2 French Language Certificate</h3>
+      <p data-template-id="cert-2-org" class="canva-text text-white/60 text-sm mb-1" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">France Éducation International</p>
+      <p data-template-id="cert-2-year" class="canva-text text-sm" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2026</p>
+     </div>
+     <div data-template-id="cert-card-3" class="canva-card cert-card p-6 rounded-2xl border border-white/10" style="background: rgb(10, 10, 10);">
+      <h3 data-template-id="cert-3-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Social Media Marketing</h3>
+      <p data-template-id="cert-3-org" class="canva-text text-white/60 text-sm mb-1" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Onpage School</p>
+      <p data-template-id="cert-3-year" class="canva-text text-sm" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2023</p>
+     </div>
+     <div data-template-id="cert-card-4" class="canva-card cert-card p-6 rounded-2xl border border-white/10" style="background: rgb(10, 10, 10);">
+      <h3 data-template-id="cert-4-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Professional Graphic Design Education</h3>
+      <p data-template-id="cert-4-org" class="canva-text text-white/60 text-sm mb-1" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Projector Institute (Ukraine)</p>
+      <p data-template-id="cert-4-year" class="canva-text text-sm" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2024</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- SOCIAL MEDIA -->
+  <section id="page-social" class="page-section pt-20">
+   <div class="relative w-full py-32 overflow-hidden">
+    <img data-template-id="social-hero-img" class="canva-image absolute inset-0 w-full h-full object-cover opacity-40" loading="lazy" src="https://images.pexels.com/photos/3850271/pexels-photo-3850271.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="Top view of notebook with cellphone on marble table">
+    <div class="relative z-10 text-center px-6">
+     <h1 data-template-id="social-hero-title" class="canva-text text-4xl md:text-6xl font-black mb-4" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Social Media Content</h1>
+     <p data-template-id="social-hero-sub" class="canva-text text-white/60 max-w-xl mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">From content production to final publication across multiple digital platforms.</p>
+    </div>
+   </div><!-- Reels Carousel -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="social-reels-heading" class="canva-text text-2xl font-bold mb-4 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Instagram Reels</h2>
+    <p data-template-id="social-reels-sub" class="canva-text text-white/50 text-center mb-12 max-w-lg mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Short-form video content created for Radio Campus Orléans and Breathing Academy.</p>
+    <div class="carousel-wrap">
+     <div class="carousel-inner" id="reels-track">
+      <div class="flex-shrink-0 w-1/3 px-3 flex justify-center">
+       <a class="phone-mockup" href="https://www.instagram.com/radio_campus_orleans/reel/DXHdee8sQqH/" target="_blank" rel="noopener" aria-label="Open Radio Campus Reel 1"><img class="canva-image" loading="lazy" src="media/radio-reel-1.png" alt="Radio Campus Reel 1"><span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a>
+      </div>
+      <div class="flex-shrink-0 w-1/3 px-3 flex justify-center">
+       <a class="phone-mockup" href="https://www.instagram.com/p/C7FQkk-Nnt9/" target="_blank" rel="noopener" aria-label="Open Breathing Academy Reel 1"><img class="canva-image" loading="lazy" src="media/breathing-reel-1.png" alt="Breathing Academy Reel 1"><span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a>
+      </div>
+      <div class="flex-shrink-0 w-1/3 px-3 flex justify-center">
+       <a class="phone-mockup" href="https://www.instagram.com/radio_campus_orleans/reel/DW9V65RMj1j/" target="_blank" rel="noopener" aria-label="Open Radio Campus Reel 2"><img class="canva-image" loading="lazy" src="media/radio-reel-2.png" alt="Radio Campus Reel 2"><span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a>
+      </div>
+      <div class="flex-shrink-0 w-1/3 px-3 flex justify-center">
+       <a class="phone-mockup" href="https://www.instagram.com/p/C8WpgAlNAvK/" target="_blank" rel="noopener" aria-label="Open Breathing Academy Reel 2"><img class="canva-image" loading="lazy" src="media/breathing-reel-2.png" alt="Breathing Academy Reel 2"><span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a>
+      </div>
+      <div class="flex-shrink-0 w-1/3 px-3 flex justify-center">
+       <div class="phone-mockup"><video class="media-video" controls playsinline preload="metadata" poster="media/breathing-reel-cover-3.png"><source src="media/breathing-reel-3.mp4" type="video/mp4"></video>
+       </div>
+      </div>
+     </div><button class="carousel-btn left-2" onclick="moveCarousel('reels-track',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="carousel-btn right-2" onclick="moveCarousel('reels-track',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+    </div>
+   </div><!-- Stories -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="social-stories-heading" class="canva-text text-2xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Instagram Stories</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-items-center">
+      <div class="flex justify-center">
+       <div class="phone-mockup cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="social-story-1-img" class="canva-image" loading="lazy" src="https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Two women practice yoga indoors focusing on wellness">
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <div class="phone-mockup cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="social-story-2-img" class="canva-image" loading="lazy" src="https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Woman practicing yoga and meditation indoors beside candles">
+       </div>
+      </div>
+      <div class="flex justify-center">
+       <div class="phone-mockup cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="social-story-3-img" class="canva-image" loading="lazy" src="https://images.pexels.com/photos/3759659/pexels-photo-3759659.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Woman resting peacefully outdoors on a sunny day">
+       </div>
+      </div>
+    </div>
+   </div><!-- Featured Video -->
+   <div class="max-w-4xl mx-auto px-6 py-32 text-center fade-in">
+    <h2 data-template-id="social-video-heading" class="canva-text text-3xl md:text-4xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Featured Video</h2>
+    <p data-template-id="social-video-sub" class="canva-text text-white/50 mb-12 max-w-md mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Promotional Teaser for UnivArena Esports Tournament Registration</p>
+    <div class="laptop-mockup aspect-video" id="featured-video-container">
+     <img data-template-id="social-featured-video-img" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOiRSmJI0/1" alt="Hands holding smartphone browsing social media in front of desktop">
+    </div>
+   </div><!-- Email Marketing -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="social-email-heading" class="canva-text text-2xl font-bold mb-4 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Email Marketing</h2>
+    <p data-template-id="social-email-desc" class="canva-text text-white/50 text-center mb-12 max-w-lg mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Newsletters designed with Mailjet for company communications, event announcements, and audience engagement.</p>
+    <div class="grid md:grid-cols-2 gap-8">
+     <div class="email-scroll-mockup cursor-zoom-in" title="Click to open full-size" onclick="openLightboxFromEl(this.querySelector('img'))">
+      <img data-template-id="social-email-1-img" class="canva-image w-full h-auto" loading="lazy" src="canva://MAHOicWM00Q/1" alt="Newsletter design preview">
+     </div>
+     <div class="email-scroll-mockup cursor-zoom-in" title="Click to open full-size" onclick="openLightboxFromEl(this.querySelector('img'))">
+      <img data-template-id="social-email-2-img" class="canva-image w-full h-auto" loading="lazy" src="https://images.pexels.com/photos/4050320/pexels-photo-4050320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Woman working at table browsing laptop in modern workplace">
+     </div>
+    </div>
+   </div><!-- Content Creation -->
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="social-creation-heading" class="canva-text text-2xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Content Creation</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="camera" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="social-card-1-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Photography</h3>
+      <p data-template-id="social-card-1-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Producing visual content adapted to each brand.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="video" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="social-card-2-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Video Production</h3>
+      <p data-template-id="social-card-2-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Filming content for social media platforms.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="scissors" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="social-card-3-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Editing</h3>
+      <p data-template-id="social-card-3-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Editing videos and adapting content for different formats.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="send" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="social-card-4-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Publishing</h3>
+      <p data-template-id="social-card-4-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Preparing content for publication according to the communication plan.</p>
+     </div>
+    </div>
+   </div>
+   <div class="text-center py-20 px-6 fade-in">
+    <a href="#strategy" data-template-id="social-cta-btn" class="canva-button inline-block px-10 py-5 font-semibold text-black rounded-full hover:scale-105 transition text-lg" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Discover My Content Strategy</a>
+   </div>
+  </section><!-- STRATEGY -->
+  <section id="page-strategy" class="page-section pt-20">
+   <div class="relative w-full py-32 overflow-hidden">
+    <div class="relative z-10 text-center px-6">
+     <h1 data-template-id="strategy-hero-title" class="canva-text text-4xl md:text-6xl font-black mb-4" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Content Strategy</h1>
+     <p data-template-id="strategy-hero-sub" class="canva-text text-white/60 max-w-xl mx-auto mb-12" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Building structured communication plans before creating content.</p>
+     <div class="max-w-3xl mx-auto laptop-mockup aspect-video"><img data-template-id="strategy-hero-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/7679733/pexels-photo-7679733.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="Hands typing on a laptop displaying a content plan document">
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="strategy-process-heading" class="canva-text text-2xl font-bold mb-16 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">My Strategic Process</h2>
+    <div class="flex flex-wrap justify-center items-start gap-2 md:gap-0">
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="briefcase" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-1" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Business
+Discovery</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="users" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-2" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Target
+Audience</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="search" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-3" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Competitor
+Analysis</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="target" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-4" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Content
+Strategy</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="lightbulb" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-5" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Content
+Ideas</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="calendar" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-6" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Editorial
+Calendar</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="film" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-7" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Content
+Production</p>
+     </div>
+     <div class="process-connector hidden md:flex"><i data-lucide="chevron-right" style="width:16px;height:16px"></i>
+     </div>
+     <div class="process-step">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-amber-400/50 flex items-center justify-center"><i data-lucide="rocket" style="width:20px;height:20px" class="text-amber-400"></i>
+      </div>
+      <p data-template-id="strategy-step-8" class="canva-text text-xs font-medium" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 12px;">Publishing</p>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="strategy-cases-heading" class="canva-text text-2xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Featured Strategy Projects</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+     <div class="border border-white/10 rounded-2xl overflow-hidden">
+      <div class="aspect-video"><img data-template-id="strategy-case-1-img" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOtjixz08/1" alt="Modern workspace with computer monitor displaying content">
+      </div>
+      <div class="p-6">
+       <h3 data-template-id="strategy-case-1-title" class="canva-text font-bold text-xl mb-3" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Kaya</h3>
+       <p data-template-id="strategy-case-1-desc" class="canva-text text-white/50 text-sm mb-4" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Business overview • Unique Value Proposition • Target Audience • Social Media Strategy • Content Ideas • Editorial Calendar</p><a href="https://peridot-candle-8a5.notion.site/Kaya-Strategy-10798f11a9498076849ffa285c2614fd" target="_blank" rel="noopener noreferrer" data-template-id="strategy-case-1-btn" class="canva-button inline-block px-6 py-2 text-sm font-semibold text-black rounded-full" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore the Strategy</a>
+      </div>
+     </div>
+     <div class="border border-white/10 rounded-2xl overflow-hidden">
+      <div class="aspect-video"><img data-template-id="strategy-case-2-img" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOtoWSiuA/1" alt="Hands typing on a laptop keyboard displaying a content plan">
+      </div>
+      <div class="p-6">
+       <h3 data-template-id="strategy-case-2-title" class="canva-text font-bold text-xl mb-3" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Cat Café Melbourne</h3>
+       <p data-template-id="strategy-case-2-desc" class="canva-text text-white/50 text-sm mb-4" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Business overview • Competitor Analysis • Target Audience • Content Ideas • Editorial Calendar</p><a href="https://peridot-candle-8a5.notion.site/Cat-Caf-Melbourne-Dashboard-1-10798f11a94980888f02f7aef5912bc6?pvs=73" target="_blank" rel="noopener noreferrer" data-template-id="strategy-case-2-btn" class="canva-button inline-block px-6 py-2 text-sm font-semibold text-black rounded-full" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore the Strategy</a>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="strategy-docs-heading" class="canva-text text-2xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Strategy Documents</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+     <div class="laptop-mockup aspect-[4/3]" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="strategy-doc-1-img" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOtlVjM-w/1" alt="Hand analyzing data on colorful bar and line charts">
+     </div>
+     <div class="laptop-mockup aspect-[4/3]" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="strategy-doc-2-img" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOtlDz2cY/1" alt="Stock market analysis documents with magnifying glass">
+     </div>
+     <div class="laptop-mockup aspect-[4/3]" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="strategy-doc-3-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Diverse team in business meeting using laptops and tablets">
+     </div>
+     <div class="laptop-mockup aspect-[4/3]" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="strategy-doc-4-img" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/6804077/pexels-photo-6804077.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Man reviewing scrum task board with sticky notes">
+     </div>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="strategy-deliver-heading" class="canva-text text-2xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">What I Deliver</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-1-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Business Analysis</h3>
+      <p data-template-id="strategy-del-1-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Understanding each brand before creating content.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-2-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Target Audience</h3>
+      <p data-template-id="strategy-del-2-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Defining the right audience for every platform.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-3-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Competitor Research</h3>
+      <p data-template-id="strategy-del-3-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Identifying opportunities and content positioning.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-4-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Content Strategy</h3>
+      <p data-template-id="strategy-del-4-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Building platform-specific communication plans.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-5-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Content Ideas</h3>
+      <p data-template-id="strategy-del-5-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Developing creative concepts aligned with brand objectives.</p>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 hover:border-amber-400/30 transition">
+      <h3 data-template-id="strategy-del-6-title" class="canva-text font-bold mb-2" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Editorial Planning</h3>
+      <p data-template-id="strategy-del-6-desc" class="canva-text text-sm text-white/50" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Creating organized monthly content calendars.</p>
+     </div>
+    </div>
+   </div>
+   <div class="text-center py-20 px-6 fade-in"><a href="#social" data-template-id="strategy-cta-btn" class="canva-button inline-block px-10 py-5 font-semibold text-black rounded-full hover:scale-105 transition text-lg" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">See the Content in Action</a>
+   </div>
+  </section><!-- GRAPHIC DESIGN -->
+  <section id="page-graphic" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 pt-16 pb-8 text-center fade-in">
+    <h1 data-template-id="graphic-intro-title" class="canva-text text-4xl md:text-6xl font-black tracking-tight mb-6" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Graphic Design</h1>
+    <p data-template-id="graphic-intro-sub" class="canva-text text-white/60 max-w-lg mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Visual communication through thoughtful and impactful design</p>
+   </div>
+   <div class="sticky top-[73px] z-40 bg-black/90 backdrop-blur-md border-b border-white/10 py-4">
+    <div class="max-w-4xl mx-auto px-6 flex justify-center gap-4 flex-wrap" id="graphic-cat-nav">
+     <a href="#gd-large-format" class="cat-pill" data-cat-link="">Large Format</a> <a href="#gd-poster-collection" class="cat-pill" data-cat-link="">Poster Collection</a> <a href="#gd-print-design" class="cat-pill" data-cat-link="">Print Design</a>
+    </div>
+   </div><!-- Large Format -->
+   <div id="gd-large-format" class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="graphic-large-heading" class="canva-text text-3xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Large Format Design</h2>
+    <p data-template-id="graphic-large-sub" class="canva-text text-white/50 mb-12" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Immersive large-format communication materials emphasizing scale and impact.</p>
+    <div class="grid md:grid-cols-3 gap-8">
+     <div class="rounded-xl overflow-hidden aspect-[3/4] cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-large-1" class="canva-image w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" src="media/graphic-large-1.png" alt="Gaming tournament with multi-screen setup">
+     </div>
+     <div class="rounded-xl overflow-hidden aspect-[3/4] cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-large-2" class="canva-image w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" src="media/graphic-large-2.png" alt="Outdoor billboard mockup with scenic view">
+     </div>
+     <div class="rounded-xl overflow-hidden aspect-[3/4] cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-large-3" class="canva-image w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" src="media/graphic-large-3.png" alt="Art gallery room with classical paintings and statue">
+     </div>
+    </div>
+   </div><!-- Poster Collection (masonry, no fullscreen) -->
+   <div id="gd-poster-collection" class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="graphic-poster-heading" class="canva-text text-3xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Poster Collection</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+     <div class="md:col-span-2 overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-1" class="canva-image w-full aspect-[16/8] object-cover" loading="lazy" src="media/graphic-poster-1.png" alt="Poster design 1"></div>
+     <div class="overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-2" class="canva-image w-full aspect-[3/4] object-contain" loading="lazy" src="media/graphic-poster-2.png" alt="Poster design 2"></div>
+     <div class="overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-3" class="canva-image w-full aspect-[3/4] object-cover" loading="lazy" src="media/graphic-poster-3.png" alt="Poster design 3"></div>
+     <div class="md:col-span-2 overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="media/graphic-poster-4.png" alt="Poster design 4"></div>
+     <div class="overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-5" class="canva-image w-full aspect-[3/4] object-contain" loading="lazy" src="media/graphic-poster-5.png" alt="Poster design 5"></div>
+     <div class="overflow-hidden rounded-2xl bg-white/5"><img data-template-id="graphic-poster-6" class="canva-image w-full aspect-[3/4] object-contain" loading="lazy" src="media/graphic-poster-6.png" alt="Poster design 6"></div>
+    </div>
+   </div><!-- Print Design (9 items, mixed aspect ratios) -->
+   <div id="gd-print-design" class="max-w-6xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="graphic-print-heading" class="canva-text text-3xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Print Design</h2>
+    <p data-template-id="graphic-print-sub" class="canva-text text-white/50 mb-12" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Printed communication materials including banners, forms, invitations, flyers, booklets, and catalogues.</p>
+    <div class="print-editorial">
+     <div class="print-top-row">
+      <div class="rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-1" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-1.png" alt="Print design 1"></div>
+      <div class="rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-2" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-2.png" alt="Print design 2"></div>
+      <div class="rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-3" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-3.png" alt="Print design 3"></div>
+     </div>
+     <div class="print-feature-row">
+      <div class="print-feature-main rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-4" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-4.png" alt="Print design 4"></div>
+      <div class="print-feature-stack">
+       <div class="rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-5" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-5.png" alt="Print design 5"></div>
+       <div class="rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-6" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-6.png" alt="Print design 6"></div>
+      </div>
+     </div>
+     <div class="print-wide-row rounded-xl overflow-hidden group cursor-pointer" onclick="openLightboxFromEl(this.querySelector('img'))"><img data-template-id="graphic-print-7" class="canva-image transition-transform duration-500 group-hover:scale-105" loading="lazy" src="media/graphic-print-7.png" alt="Print design 7"></div>
+    </div>
+   </div><!-- Design Approach -->
+   <div class="max-w-5xl mx-auto px-6 py-24 fade-in">
+    <h2 data-template-id="graphic-approach-heading" class="canva-text text-3xl font-bold mb-12 text-center" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Design Approach</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="eye" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="graphic-approach-1" class="canva-text font-bold text-sm" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Visual Communication</h3>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="type" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="graphic-approach-2" class="canva-text font-bold text-sm" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Typography</h3>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="printer" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="graphic-approach-3" class="canva-text font-bold text-sm" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Print Design</h3>
+     </div>
+     <div class="border border-white/10 rounded-2xl p-6 text-center hover:border-amber-400/30 transition">
+      <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/5 flex items-center justify-center"><i data-lucide="layout" style="width:24px;height:24px" class="text-amber-400"></i>
+      </div>
+      <h3 data-template-id="graphic-approach-4" class="canva-text font-bold text-sm" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Editorial Layout</h3>
+     </div>
+    </div>
+   </div>
+   <div class="text-center py-20 px-6 fade-in">
+    <h2 data-template-id="graphic-cta-heading" class="canva-text text-3xl font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 24px;">Have a project in mind?</h2><a href="#contact" data-template-id="graphic-cta-btn" class="canva-button inline-block px-8 py-4 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Let’s Collaborate</a>
+   </div>
+  </section><!-- CASE STUDIES -->
+  <section id="page-case-reaco" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-reaco-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAGT62e40UY/1" alt="Cinematic scene with cameraman setting up professional video equipment">
+    </div>
+    <h1 data-template-id="case-reaco-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">UnivArena</h1>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-reaco-overview-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Project Overview</h3>
+      <p data-template-id="case-reaco-overview" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">A university esports tournament organized for students, supported by FEDET, featuring a League of Legends competition with both on-site matches and a Twitch livestream. The project aimed to bring students together around digital culture, build an engaged community, and increase event visibility through strategic communication and visual content.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-reaco-challenge-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Challenge</h3>
+      <p data-template-id="case-reaco-challenge" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Launching a new university esports event required building awareness from scratch and attracting a large student audience in a competitive digital environment. The main objective was to reach 200 participants, create excitement around the League of Legends tournament, and establish a consistent communication strategy across multiple platforms.</p>
+     </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-reaco-role-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">My Role</h3>
+      <p data-template-id="case-reaco-role" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">As Digital Communication Manager, I developed the communication strategy, managed digital promotion, and created visual content to support the tournament's growth.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-reaco-process-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Process</h3>
+      <p data-template-id="case-reaco-process" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Built the event's visual identity and communication strategy by creating Instagram content (posts and stories), promotional posters, roll-up banners, and a teaser video distributed across university campuses in two cities.</p>
+     </div>
+    </div>
+    <div class="mb-16">
+     <h3 data-template-id="case-reaco-outcome-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Final Outcome</h3>
+     <p data-template-id="case-reaco-outcome" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The campaign exceeded the initial goal, achieving 450+ registrations and successfully establishing a strong digital identity for a new university esports initiative. The project successfully combined digital and offline communication, creating a recognizable visual identity across social media, campus materials, and the Twitch livestream experience.</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="reaco-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-reaco-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAGT65o6MAs/1" alt="Modern workspace with computer monitor">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-reaco-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAGTwiqW44I/1" alt="Hands typing on laptop displaying content plan">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-reaco-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-reaco-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('reaco-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('reaco-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="reaco-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-reaco-related-heading" class="canva-text text-lg font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Explore more graphic design created for this project.</h3><a href="#graphic" data-template-id="case-reaco-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore Graphic Design</a>
+    </div>
+   </div>
+  </section>
+  <section id="page-case-breathing" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-breathing-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAGOZSfAyyo/1" alt="Woman practicing meditation with candles and incense">
+    </div>
+    <h1 data-template-id="case-breathing-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Breathing Academy</h1>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-breathing-overview-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Project Overview</h3>
+      <p data-template-id="case-breathing-overview" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Breathing Academy is a French institute specializing in functional breathing education, offering professional trainings, courses, workshops, and immersive experiences.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-breathing-challenge-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Challenge</h3>
+      <p data-template-id="case-breathing-challenge" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The project focused on strengthening the Academy's digital communication, maintaining consistent branding, and promoting its educational programs through websites, social media, email campaigns, and offline materials.</p>
+     </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-breathing-role-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">My Role</h3>
+      <p data-template-id="case-breathing-role" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">As Digital Communications Manager &amp; Web Content Assistant, I created visual content and supported website management. I developed content strategies, updated two WordPress websites, produced photo and video content, and designed digital and print materials.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-breathing-process-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Process</h3>
+      <p data-template-id="case-breathing-process" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Created social media content including posts, Stories, and Reels; produced and edited photo/video materials; updated website content; designed newsletters via Mailjet; and developed promotional assets such as flyers, brochures, roll-up banners, and other printed materials.</p>
+     </div>
+    </div>
+    <div class="mb-16">
+     <h3 data-template-id="case-breathing-outcome-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Final Outcome</h3>
+     <p data-template-id="case-breathing-outcome" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Strengthened Breathing Academy's social media presence by developing a promotion strategy, introducing new content formats and recurring rubrics, and creating consistent visual communication. The project improved the brand's positioning, increased online visibility, and helped build a stronger connection with the audience across digital channels.</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="breathing-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-breathing-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAGObBSOnkY/1" alt="Two women practice yoga indoors">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-breathing-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-breathing-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/8436610/pexels-photo-8436610.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A diverse group of adults engaged in yoga poses during an indoor class">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-breathing-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/4457911/pexels-photo-4457911.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Woman practicing yoga outdoors amidst lush greenery">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('breathing-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('breathing-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="breathing-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-breathing-related-heading" class="canva-text text-lg font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Discover more multimedia content created for this project.</h3><a href="#social" data-template-id="case-breathing-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore Social Media</a>
+    </div>
+   </div>
+  </section>
+  <section id="page-case-radio" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-radio-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOtwjzCcQ/1" alt="Studio microphone with pop filter for recording audio">
+    </div>
+    <h1 data-template-id="case-radio-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Radio Campus Orléans</h1>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-radio-overview-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Project Overview</h3>
+      <p data-template-id="case-radio-overview" class="canva-text whitespace-pre-line text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Radio Campus Orléans is an independent radio station with a large community of presenters, broadcasting continuously and actively participating in cultural events, festivals, and local initiatives. The project involved supporting the station's media production and digital communication through content creation and event coverage.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-radio-challenge-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Challenge</h3>
+      <p data-template-id="case-radio-challenge" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The challenge was to capture the energy of live events and transform it into engaging digital content while supporting the station's communication needs and maintaining a strong connection with its audience and cultural partners.</p>
+     </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-radio-role-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">My Role</h3>
+      <p data-template-id="case-radio-role" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">As a Digital Content Creator, I was responsible for producing multimedia content and supporting the station's digital communication. I created photo and video content, developed social media materials, wrote website articles, and managed communication with artists during interviews and events.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-radio-process-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Process</h3>
+      <p data-template-id="case-radio-process" class="canva-text whitespace-pre-line text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Captured and edited photo/video content during events, created social media materials, and wrote website articles to highlight the station's activities. Coordinated with artists during interviews and supported radio productions through technical preparation and event setup.</p>
+     </div>
+    </div>
+    <div class="mb-16">
+     <h3 data-template-id="case-radio-outcome-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Final Outcome</h3>
+     <p data-template-id="case-radio-outcome" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Enhanced Radio Campus Orléans' digital communication by creating engaging multimedia content, showcasing cultural events, and strengthening the connection between the radio station, artists, and its audience.</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="radio-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-radio-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAHOicgXvQw/1" alt="Female blogger recording audio near microphone">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-radio-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAHOie8mQtg/1" alt="Microphone in a recording studio">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-radio-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/19452352/pexels-photo-19452352.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Professional audio mixing console with colorful LED indicators">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-radio-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/13230484/pexels-photo-13230484.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Night concert scene with audience and colorful stage lighting">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('radio-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('radio-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="radio-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-radio-related-heading" class="canva-text text-lg font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Want to see more content created for this project?</h3><a href="#social" data-template-id="case-radio-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore Social Media</a>
+    </div>
+   </div>
+  </section>
+  <section id="page-case-luna" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-luna-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAHOiTEfZOs/1" alt="Restaurant interior with elegant table settings">
+    </div>
+    <h1 data-template-id="case-luna-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Luna Rossa</h1>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-luna-overview-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Project Overview</h3>
+      <p data-template-id="case-luna-overview" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Luna Rossa Production is an entertainment company that provides professional entertainers and performers for a wide range of private and corporate events. Through themed performances, interactive activities, and live entertainment, the company creates engaging and memorable experiences for its audiences.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-luna-challenge-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Challenge</h3>
+      <p data-template-id="case-luna-challenge" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The goal was to strengthen the company’s digital presence, showcase its services more effectively, and develop a consistent visual identity that reflected the creativity and energy of its events.</p>
+     </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-luna-role-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">My Role</h3>
+      <p data-template-id="case-luna-role" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">As a Social Media &amp; Content Specialist, I managed Luna Rossa Production’s digital communication across Instagram and TikTok. My responsibilities included content creation, visual production, video editing, publishing, and social media management, with a focus on increasing brand visibility and audience engagement.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-luna-process-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Process</h3>
+      <p data-template-id="case-luna-process" class="canva-text whitespace-pre-line text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">I produced and edited photo and video content, managed Instagram and TikTok publications, and designed promotional assets, including banners and campaign visuals. I adapted each piece of content to the specific requirements of each platform while maintaining a consistent brand identity.
+
+I also supported the promotion of the company’s services through organic content and targeted Facebook Ads and TikTok Ads campaigns.</p>
+     </div>
+    </div>
+    <div class="mb-16">
+     <h3 data-template-id="case-luna-outcome-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Final Outcome</h3>
+     <p data-template-id="case-luna-outcome" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The project strengthened Luna Rossa Production’s online presence through more consistent social media communication and a clearer visual identity. The combination of organic content and targeted advertising increased the visibility of its services and presented the brand’s creative universe more effectively across digital platforms.</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="luna-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-luna-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAHOicx-Dys/1" alt="Elegant table setting in a restaurant">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-luna-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAHOidWJfu4/1" alt="Woman enjoying pasta and wine">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-luna-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/11657969/pexels-photo-11657969.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Circus juggler performs under dramatic lighting">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-luna-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/17294765/pexels-photo-17294765.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Event venue with elegant floral arrangements">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('luna-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('luna-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="luna-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-luna-related-heading" class="canva-text text-lg font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">See more social media content created for this project.</h3><a href="#social" data-template-id="case-luna-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore Social Media</a>
+    </div>
+   </div>
+  </section>
+  <section id="page-case-poster" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-poster-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="canva://MAGVyVNhzj0/1" alt="Minimalistic poster with bold typography">
+    </div>
+    <h1 data-template-id="case-poster-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Poster Design</h1>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-poster-overview-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Project Overview</h3>
+      <p data-template-id="case-poster-overview" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">A graphic design project created during a design course at Projector Institute in Ukraine, focused on exploring the relationship between visual communication and urban culture. The task was to transform poetry and song lyrics into a series of posters designed for public spaces in Kyiv.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-poster-challenge-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Challenge</h3>
+      <p data-template-id="case-poster-challenge" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The challenge was to translate abstract ideas, emotions, and literary references into strong visual concepts that could communicate with an urban audience. The goal was to create posters that were not only visually appealing but also meaningful, recognizable, and suitable for both print and digital formats.</p>
+     </div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+     <div>
+      <h3 data-template-id="case-poster-role-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">My Role</h3>
+      <p data-template-id="case-poster-role" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">As a graphic design student, I developed a complete poster series from concept development to final production. I worked on visual research, sketches, composition, typography, and illustration while applying design principles learned with a mentor.</p>
+     </div>
+     <div>
+      <h3 data-template-id="case-poster-process-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Process</h3>
+      <p data-template-id="case-poster-process" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">The project followed a complete design workflow, starting with concept development and visual exploration, followed by sketches, composition experiments, and digital execution in Adobe Illustrator. I prepared the final artworks for both printed materials and digital use, considering technical requirements for different formats.</p>
+     </div>
+    </div>
+    <div class="mb-16">
+     <h3 data-template-id="case-poster-outcome-label" class="canva-text text-sm uppercase tracking-widest mb-3" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 19px;">Final Outcome</h3>
+     <p data-template-id="case-poster-outcome" class="canva-text text-white/60 leading-relaxed" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Created a series of 10 original posters combining poetry, music, and visual storytelling. The project strengthened my skills in conceptual design, typography, illustration, and preparing graphic materials for real-world applications in urban environments.</p>
+    </div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="poster-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-poster-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAGXlHYTr2A/1" alt="Bold yellow text on black background">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-poster-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAGUIZ7Wqfs/1" alt="Minimalist poster with bold text">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-poster-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/6620972/pexels-photo-6620972.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Vintage printing press in a design studio">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-poster-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/18386910/pexels-photo-18386910.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stylish arrangement of vintage books and posters">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('poster-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('poster-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="poster-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-poster-related-heading" class="canva-text text-lg font-bold mb-4" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">Browse the complete poster collection.</h3><a href="#graphic" data-template-id="case-poster-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Explore Graphic Design</a>
+    </div>
+   </div>
+  </section>
+  <section id="page-case-other" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-24">
+    <div class="aspect-video rounded-2xl overflow-hidden mb-12"><img data-template-id="case-other-hero" class="canva-image w-full h-full object-cover" loading="lazy" src="https://images.pexels.com/photos/31726562/pexels-photo-31726562.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="A sleek camera on a contemporary minimalist desk">
+    </div>
+    <h1 data-template-id="case-other-title" class="canva-text text-4xl md:text-5xl font-black mb-8" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Other Creative Projects</h1>
+    <div class="max-w-3xl mb-16 border-t border-white/15 pt-10"><h2 class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] accent">My Approach</h2><p class="text-lg leading-relaxed text-white/60">I enjoy working with projects from very different fields, including health and wellness, restaurants, education, culture and charitable initiatives. Before creating a design, I take the time to understand the company’s positioning, values, audience and the real purpose behind the project. This helps me create visual solutions that feel authentic to each client and communicate what truly matters to them in a clear and thoughtful way.</p></div>
+    <div class="max-w-4xl mx-auto mb-16">
+     <div class="gallery-carousel relative mb-4" id="other-gallery">
+      <div class="gallery-track flex gap-4" style="width:100%;transition:transform 0.5s ease">
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-other-gal-1" class="canva-image w-full aspect-video object-cover" loading="lazy" src="canva://MAHOuKmHRsg/1" alt="Minimalist black and gold skincare product">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-other-gal-2" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/5706026/pexels-photo-5706026.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Minimalist mockup with white paper pieces">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-other-gal-3" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/4219217/pexels-photo-4219217.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Artist workplace with modern tools and materials">
+       </div>
+       <div class="gallery-slide flex-shrink-0 w-1/2 rounded-xl overflow-hidden"><img data-template-id="case-other-gal-4" class="canva-image w-full aspect-video object-cover" loading="lazy" src="https://images.pexels.com/photos/5706020/pexels-photo-5706020.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Stack of blank business cards on pastel surface">
+       </div>
+      </div><button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('other-gallery',-1)"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button> <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition" onclick="moveGallery('other-gallery',1)"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button>
+     </div>
+     <div class="text-center text-white/40 text-sm">
+      <span class="gallery-counter" id="other-counter">1</span> / 4
+     </div>
+    </div>
+    <div class="border-t border-white/10 py-8 text-center">
+     <h3 data-template-id="case-other-related-heading" class="canva-text text-2xl font-bold mb-3" style="color: rgb(255, 255, 255); font-weight: 700;">Interested in working with me?</h3><p class="text-white/60 mb-5">Let’s talk about your project and create something thoughtful together.</p><a href="#contact" data-template-id="case-other-related-btn" class="canva-button inline-block px-8 py-3 font-semibold text-black rounded-full hover:scale-105 transition" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Contact Me</a>
+    </div>
+   </div>
+  </section><!-- CONTACT -->
+  <section id="page-contact" class="page-section pt-20">
+   <div class="max-w-4xl mx-auto px-6 py-32">
+    <h1 data-template-id="contact-title" class="canva-text text-4xl md:text-6xl font-black mb-4 text-center" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">Let's Work Together</h1>
+    <p data-template-id="contact-sub" class="canva-text text-white/60 text-center mb-12 max-w-md mx-auto" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+    <div class="mb-10 flex flex-wrap justify-center gap-3"><a href="https://www.linkedin.com/in/yuliia-diachenko/?locale=fr-FR" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-amber-400 hover:text-amber-400 transition">LinkedIn</a><a href="https://www.tiktok.com/@wavecurl.y" target="_blank" rel="noopener" class="px-5 py-3 rounded-full border border-white/20 hover:border-amber-400 hover:text-amber-400 transition">TikTok</a><a href="media/CV-Yuliia-Diachenko.pdf.pdf" target="_blank" class="px-5 py-3 rounded-full bg-amber-400 text-black font-semibold hover:scale-105 transition">Download CV</a></div>
+    <form id="contact-form" class="max-w-lg mx-auto space-y-4" action="https://formsubmit.co/yuliia.diachenko.dp@gmail.com" method="POST" onsubmit="handleForm(event,this)">
+     <input type="hidden" name="_subject" value="New portfolio enquiry"><input type="hidden" name="_template" value="table"><input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none"><label for="c-name" class="sr-only">Name</label><input id="c-name" name="name" type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white" required=""> <label for="c-email" class="sr-only">Email</label><input id="c-email" name="email" type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white" required=""> <label for="c-phone" class="sr-only">Phone</label><input id="c-phone" name="phone" type="tel" placeholder="Phone" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white"> <label for="c-msg" class="sr-only">Message</label><textarea id="c-msg" name="message" placeholder="Your message" rows="5" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white" required=""></textarea> <button type="submit" data-template-id="contact-form-btn" class="canva-button w-full py-3 rounded-lg font-semibold text-black disabled:cursor-wait disabled:opacity-60" style="background: rgb(232, 168, 56); color: rgb(0, 0, 0); font-weight: 600; font-style: normal; font-size: 16px;">Send Message</button><p id="contact-form-status" class="min-h-[1.5rem] text-center text-sm text-white/60" role="status" aria-live="polite"></p>
+    </form>
+    <div class="mt-12 flex flex-wrap justify-center gap-6 text-white/60 text-sm">
+     <a href="mailto:yuliia.diachenko.dp@gmail.com" data-template-id="contact-email" class="canva-text hover:text-white transition" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">yuliia.diachenko.dp@gmail.com</a>
+    </div>
+   </div>
+  </section><!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+   <button class="absolute top-6 right-6 text-white/60 hover:text-white" onclick="closeLightbox(event)"><i data-lucide="x" style="width:32px;height:32px"></i></button> <button class="absolute left-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white" onclick="lbPrev(event)"><i data-lucide="chevron-left" style="width:32px;height:32px"></i></button> <button class="absolute right-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white" onclick="lbNext(event)"><i data-lucide="chevron-right" style="width:32px;height:32px"></i></button>
+   <div id="lightbox-media-wrap" class="lightbox-media-wrap"><img id="lightbox-img" src="" alt=""></div>
+  </div>
+  <script>
+const pageMap={home:'page-home',about:'page-about',social:'page-social',strategy:'page-strategy',graphic:'page-graphic',contact:'page-contact','case-reaco':'page-case-reaco','case-breathing':'page-case-breathing','case-radio':'page-case-radio','case-luna':'page-case-luna','case-poster':'page-case-poster','case-other':'page-case-other'};
+function navigate(){
+const hash=window.location.hash.replace('#','')||'home';
+document.querySelectorAll('.page-section').forEach(s=>{s.classList.remove('active');s.style.opacity='0'});
+const target=document.getElementById(pageMap[hash]||'page-home');
+if(target){target.classList.add('active');setTimeout(()=>{target.style.opacity='1'},20)}
+document.querySelectorAll('[data-nav]').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+hash));
+window.scrollTo(0,0);
+document.getElementById('mobile-menu').classList.add('hidden');
+}
+window.addEventListener('hashchange',navigate);
+navigate();
+document.getElementById('mobile-menu-btn').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.toggle('hidden')});
+
+document.querySelectorAll('[data-cat-link]').forEach(link=>{
+link.addEventListener('click',e=>{e.preventDefault();const target=document.querySelector(link.getAttribute('href'));if(target)target.scrollIntoView({behavior:'smooth',block:'start'})});
+});
+
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Feature Carousel
+const featureTrack=document.getElementById('feature-track');let fIdx=0;
+function getSlideCount(){if(window.innerWidth<640)return 1;if(window.innerWidth<1024)return 2;return 3}
+function updateCarousel(){featureTrack.style.transform=`translateX(-${fIdx*(100/getSlideCount())}%)`}
+document.getElementById('carousel-next').addEventListener('click',()=>{fIdx=Math.min(fIdx+1,6-getSlideCount());updateCarousel()});
+document.getElementById('carousel-prev').addEventListener('click',()=>{fIdx=Math.max(fIdx-1,0);updateCarousel()});
+window.addEventListener('resize',()=>{fIdx=Math.min(fIdx,6-getSlideCount());updateCarousel()});
+
+// Generic carousel mover
+const carouselState={};
+function moveCarousel(trackId,dir){
+const el=document.getElementById(trackId);
+const children=el.children;
+const visible=window.innerWidth<768?1:3;
+const max=Math.max(0,children.length-visible);
+if(!carouselState[trackId])carouselState[trackId]=0;
+carouselState[trackId]+=dir;
+if(carouselState[trackId]>max)carouselState[trackId]=0;
+if(carouselState[trackId]<0)carouselState[trackId]=max;
+el.style.transform=`translateX(-${carouselState[trackId]*(100/visible)}%)`;
+}
+
+// Gallery carousel for case studies (2 images visible)
+const galleryState={};
+function moveGallery(galleryId,dir){
+const el=document.getElementById(galleryId);
+const track=el.querySelector('.gallery-track');
+const slides=track.children.length;
+const visible=window.innerWidth<640?1:2;
+const max=Math.max(0,slides-visible);
+if(!galleryState[galleryId])galleryState[galleryId]=0;
+galleryState[galleryId]=Math.max(0,Math.min(max,galleryState[galleryId]+dir));
+const gap=parseFloat(getComputedStyle(track).gap)||0;
+const step=track.children[0].getBoundingClientRect().width+gap;
+track.style.transform=`translateX(-${galleryState[galleryId]*step}px)`;
+const counter=document.getElementById(galleryId.replace('-gallery','-counter'));
+if(counter)counter.textContent=galleryState[galleryId]+1;
+}
+
+// Stories carousel with infinite loop
+let storiesIdx=0;
+function moveStoriesCarousel(dir){
+const el=document.getElementById('stories-track');
+const total=el.children.length;
+const visible=window.innerWidth<768?1:3;
+storiesIdx+=dir;
+if(storiesIdx<0)storiesIdx=total-visible;
+if(storiesIdx>total-visible)storiesIdx=0;
+el.style.transform=`translateX(-${storiesIdx*(100/visible)}%)`;
+}
+
+// Lightbox
+let lbImages=[];let lbIdx=0;let lbScrollable=false;
+function openLightboxFromEl(img){
+if(!img||!img.src)return;
+lbScrollable=!!img.closest('.email-scroll-mockup,.case-newsletter');
+if(lbScrollable){lbImages=[img];lbIdx=0}
+else{
+ const scope=img.closest('#gd-large-format,#gd-poster-collection,#gd-print-design,#page-strategy,.case-media')||img.parentElement;
+ lbImages=[...scope.querySelectorAll('img')].filter(item=>item.src);
+ lbIdx=Math.max(0,lbImages.indexOf(img));
+}
+showLightbox();
+}
+function showLightbox(){
+if(lbImages[lbIdx]&&lbImages[lbIdx].src){
+const wrap=document.getElementById('lightbox-media-wrap');
+wrap.classList.toggle('is-scrollable',lbScrollable);
+wrap.scrollTop=0;
+document.getElementById('lightbox-img').src=lbImages[lbIdx].src;
+document.getElementById('lightbox').classList.add('open');
+}
+}
+function closeLightbox(e){if(e.target.closest('button')||e.target===document.getElementById('lightbox')){document.getElementById('lightbox').classList.remove('open')}}
+function lbPrev(e){e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLightbox()}
+function lbNext(e){e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx+1)%lbImages.length;showLightbox()}
+
+async function handleForm(e,form){
+ e.preventDefault();
+ const btn=form.querySelector('button[type="submit"]');
+ const status=form.querySelector('#contact-form-status');
+ const orig=btn.textContent;
+ btn.textContent=translatePhrase('Sending…');btn.disabled=true;status.textContent='';
+ try{
+  const payload=Object.fromEntries(new FormData(form).entries());
+  const response=await fetch('https://formsubmit.co/ajax/yuliia.diachenko.dp@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok||result.success===false)throw new Error(result.message||'Submission failed');
+  form.reset();btn.textContent=translatePhrase('Sent ✓');status.textContent=translatePhrase('Thank you. Your message has been sent.');status.style.color='#E8A838';
+  setTimeout(()=>{btn.textContent=orig;btn.disabled=false},3500);
+ }catch(error){
+  btn.textContent=orig;btn.disabled=false;status.textContent=translatePhrase('The message could not be sent. Please email me at yuliia.diachenko.dp@gmail.com.');status.style.color='#fca5a5';
+ }
+}
+// Standalone fallback for images that are available only through Canva.
+const placeholders=[
+  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80',
+  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80',
+  'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80'
+];
+document.querySelectorAll('img[src^="canva://"]').forEach((img,index)=>{img.src=placeholders[index%placeholders.length]});
+// Automatic image bindings. Replace a file in /media using the README name and reload the page.
+const automaticMedia={
+ 'hero-bg-image':'media/home-hero.png',
+ 'project-1-img':'media/home-featured-radio.png',
+ 'project-2-img':'media/home-featured-breathing.png',
+ 'project-3-img':'media/home-featured-reaco.png',
+ 'project-4-img':'media/home-featured-luna.png',
+ 'project-5-img':'media/home-featured-poster.png',
+ 'project-6-img':'media/home-featured-other.png',
+ 'home-category-social-img':'media/home-category-social.png',
+ 'home-category-graphic-img':'media/home-category-graphic.png',
+ 'about-photo':'media/about-portrait.png',
+ 'about-workspace-img':'media/about-workspace.png',
+ 'social-hero-img':'media/social-hero.png',
+ 'social-featured-video-img':'media/featured-video-cover.png',
+ 'social-story-1-img':'media/social-story-1.png',
+ 'social-story-2-img':'media/social-story-2.png',
+ 'social-story-3-img':'media/social-story-3.png',
+ 'social-email-1-img':'media/email-1.png',
+ 'social-email-2-img':'media/email-2.png',
+ 'strategy-hero-img':'media/strategy-hero.png',
+ 'strategy-case-1-img':'media/strategy-case-1.png',
+ 'strategy-case-2-img':'media/strategy-case-2.png',
+ 'strategy-doc-1-img':'media/strategy-document-1.png',
+ 'strategy-doc-2-img':'media/strategy-document-2.png',
+ 'strategy-doc-3-img':'media/strategy-document-3.png',
+ 'strategy-doc-4-img':'media/strategy-document-4.png',
+ 'case-radio-hero':'media/home-featured-radio.png',
+ 'case-breathing-hero':'media/home-featured-breathing.png',
+ 'case-reaco-hero':'media/home-featured-reaco.png',
+ 'case-luna-hero':'media/home-featured-luna.png',
+ 'case-poster-hero':'media/home-featured-poster.png',
+ 'case-other-hero':'media/home-featured-other.png'
+};
+Object.entries(automaticMedia).forEach(([templateId,path])=>{
+ const img=document.querySelector(`[data-template-id="${templateId}"]`);
+ if(!img)return;
+ const fallback=img.getAttribute('src');
+ img.onerror=()=>{img.onerror=null;img.src=fallback};
+ img.src=path;
+});
+// Ensure the Print Design assets load even before the Graphic Design section becomes visible.
+document.querySelectorAll('#gd-print-design img').forEach(img=>{img.loading='eager';img.src=img.getAttribute('src')});
+const featuredPreview=document.querySelector('#featured-video-container img');
+if(featuredPreview){
+ const video=document.createElement('video');
+ video.className='media-video';video.controls=true;video.playsInline=true;video.preload='metadata';video.poster=featuredPreview.src;
+ video.setAttribute('aria-label','Featured social media video');
+ const source=document.createElement('source');source.src='media/featured-video.mp4';source.type='video/mp4';
+ video.append(source);featuredPreview.replaceWith(video);
+}
+
+// Case-study media layouts.
+const poster='https://images.pexels.com/photos/164755/pexels-photo-164755.jpeg?auto=compress&cs=tinysrgb&w=900';
+const visual='https://images.pexels.com/photos/3850271/pexels-photo-3850271.jpeg?auto=compress&cs=tinysrgb&w=900';
+const eventPhoto='https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=900';
+const videoSlot=(src,cover=poster,type='video/mp4')=>`<video controls playsinline preload="metadata"${cover?` poster="${cover}"`:''}><source src="${src}" type="${type}"></video>`;
+const imageSlot=(src,alt='Project visual')=>`<img src="${src}" alt="${alt}" loading="lazy">`;
+const storyFallbacks=['https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=900','https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&cs=tinysrgb&w=900','https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=900'];
+const storySlot=(src,index)=>`<img src="${src}" data-fallback="${storyFallbacks[index]}" alt="Breathing Academy story" loading="lazy">`;
+const caseLayouts={
+ 'radio-gallery':`<section class="case-media"><p class="case-media-label">Instagram reels</p><div class="radio-reels-wide"><a class="radio-reel-wide" href="https://www.instagram.com/radio_campus_orleans/reel/DXHdee8sQqH/" target="_blank" rel="noopener" aria-label="Open Radio reel 1 on Instagram">${imageSlot('media/radio-reel-1.png','Radio Campus Instagram reel 1')}<span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a><a class="radio-reel-wide" href="https://www.instagram.com/radio_campus_orleans/reel/DW9V65RMj1j/" target="_blank" rel="noopener" aria-label="Open Radio reel 2 on Instagram">${imageSlot('media/radio-reel-2.png','Radio Campus Instagram reel 2')}<span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a></div><p class="case-media-note">Click either visual to open the Reel on Instagram.</p><div class="case-wide mt-10">${imageSlot('media/radio-article.png','Radio Campus article cover')}</div><div class="mt-5 border-l-2 border-amber-400 pl-5"><p class="case-media-label">Featured article</p><h3 class="text-2xl font-bold mb-2">ÉGIDE, LOUISADONNA, COLT : LE MAG CULTUREL SUR OFESTOCHE</h3><p class="text-white/60 mb-4">An article published by Radio Campus Orléans.</p><a href="https://orleans.radiocampus.org/actualite-emission/egide-louisadonna-colt-le-mag-culturel-sur-ofestoche-du-10-avril/" target="_blank" rel="noopener" class="accent font-semibold">Read article →</a></div></section>`,
+ 'breathing-gallery':`<section class="case-media"><p class="case-media-label">Instagram Reels</p><div class="case-phone-grid"><a class="case-phone" href="https://www.instagram.com/p/C7FQkk-Nnt9/" target="_blank" rel="noopener" aria-label="Open Breathing Academy reel 1 on Instagram">${imageSlot('media/breathing-reel-1.png','Breathing Academy Instagram reel 1')}<span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a><a class="case-phone" href="https://www.instagram.com/p/C8WpgAlNAvK/" target="_blank" rel="noopener" aria-label="Open Breathing Academy reel 2 on Instagram">${imageSlot('media/breathing-reel-2.png','Breathing Academy Instagram reel 2')}<span class="case-play"><i data-lucide="play" aria-hidden="true"></i></span></a><div class="case-phone">${videoSlot('media/breathing-reel-3.MOV',visual,'video/quicktime')}</div></div><p class="case-media-label mt-10">Stories</p><div class="case-story-grid">${[1,2,3].map((n,index)=>`<div class="case-story">${storySlot(`media/breathing-story-${n}.png`,index)}</div>`).join('')}</div><p class="case-media-label mt-10">Newsletter</p><div class="case-newsletter" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/breathing-newsletter.png','Long newsletter')}</div><p class="case-media-label mt-10">Print materials</p><div class="case-print-grid">${[1,2].map(n=>`<div class="case-print case-print-portrait" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/breathing-print-${n}.png`,'Print material')}</div>`).join('')}</div></section>`,
+ 'reaco-gallery':`<section class="case-media"><p class="case-media-label">Social Media Content</p><div class="reaco-social-grid">${[1,2,3,4].map(n=>`<div class="reaco-social-item" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/reaco-social-${n}.png`,'UnivArena social media visual')}</div>`).join('')}</div><p class="case-media-label mt-10">UnivArena on Instagram</p><a class="reaco-instagram-card" href="https://www.instagram.com/univarena/" target="_blank" rel="noopener" aria-label="Open UnivArena on Instagram">${imageSlot('media/reaco-instagram.png','UnivArena Instagram visual')}<span class="reaco-instagram-link">View @univarena <i data-lucide="arrow-up-right" style="width:16px;height:16px"></i></span></a><p class="case-media-label mt-10">Campaign Video</p><div class="case-wide">${videoSlot('media/featured-video.mp4','media/featured-video-cover.png')}</div><div class="mt-5 border-l-2 border-amber-400 pl-5"><h3 class="text-2xl font-bold mb-2">A campaign visible across campus</h3><p class="text-white/60 leading-relaxed">The campaign video was shown across all university campuses, extending the project beyond social media and into the university’s physical spaces.</p></div><p class="case-media-label mt-10">Campaign Across Campus</p><div class="reaco-campus-grid"><div class="reaco-campus-large" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/reaco-campus-large.png','UnivArena campaign displayed across the university')}</div></div><p class="case-media-label mt-10">Printed Materials · Roll-ups</p><div class="reaco-rollups">${[1,2].map(n=>`<div class="reaco-rollup" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/reaco-rollup-${n}.png`,'UnivArena roll-up banner')}</div>`).join('')}</div><p class="case-media-label mt-10">Printed Materials · Posters</p><div class="reaco-posters">${[1,2].map(n=>`<div class="reaco-poster" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/reaco-poster-${n}.png`,'UnivArena poster')}</div>`).join('')}</div></section>`,
+ 'luna-gallery':`<section class="case-media"><p class="case-media-label">Video content</p><div class="case-video-carousel"><div class="case-video-viewport"><div class="case-video-track" id="luna-video-track">${[1,2,3,4,5].map(n=>`<div class="case-video-slide"><div class="case-phone">${videoSlot(`media/luna-video-${n}.mp4`,'')}</div></div>`).join('')}</div></div><button class="carousel-btn left-2" type="button" onclick="moveCarousel('luna-video-track',-1)" aria-label="Previous Luna Rossa video"><i data-lucide="chevron-left" style="width:20px;height:20px"></i></button><button class="carousel-btn right-2" type="button" onclick="moveCarousel('luna-video-track',1)" aria-label="Next Luna Rossa video"><i data-lucide="chevron-right" style="width:20px;height:20px"></i></button></div><p class="case-media-label mt-10">Instagram Account Statistics</p><div class="case-gallery-row">${[1,2,3].map(n=>imageSlot(`media/luna-statistics-${n}.png`,'Luna Rossa Instagram account statistics')).join('')}</div><p class="case-media-label mt-10">Newsletter</p><div class="luna-newsletter-wrap"><div class="case-newsletter luna-newsletter" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/email-2.png','Long Luna Rossa newsletter')}</div><span class="luna-scroll-hint">Scroll down <i data-lucide="arrow-down" style="width:14px;height:14px"></i></span></div></section>`,
+ 'poster-gallery':`<section class="case-media"><p class="case-media-label">Poster collection</p><div class="poster-mosaic">${[1,2,3].map(n=>imageSlot(`media/poster-${n}.png`,'Poster design inspired by poetry and music')).join('')}<img class="poster-wide" src="media/poster-wide-1.png" alt="Wide poster composition inspired by poetry and music" loading="lazy"></div></section>`,
+ 'other-gallery':`<section class="case-media"><div class="other-project-block"><p class="case-media-label">Countries &amp; Traditions · Animated Book</p><div class="other-book" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/other.gif','Animated book about countries and traditions')}</div></div><div class="other-project-block"><p class="case-media-label">Sanary Town Hall · Social Media Posts</p><div class="other-sanary-grid">${[1,2,3].map(n=>`<div class="other-sanary" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/graphic-print-${n}.png`,'Sanary Town Hall social media post')}</div>`).join('')}</div></div><div class="other-project-block"><p class="case-media-label">LostInBerry · Norwegian Chocolate Strawberries</p><div class="other-lost-wide" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/lostinberry-1.png','LostInBerry chocolate strawberry project')}</div></div><div class="other-project-block"><p class="case-media-label">Café Projects</p><div class="other-small-grid">${[1,2].map(n=>`<div class="other-small" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/cafe-project-${n}.png`,'Café design project')}</div>`).join('')}</div></div><div class="other-project-block"><p class="case-media-label">Le Bouillon · Ticketing</p><div class="other-bouillon" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot('media/le-bouillon.png','Le Bouillon ticketing project')}</div></div><div class="other-project-block"><p class="case-media-label">Project for the Serhiy Prytula Charity Foundation</p><div class="other-charity-grid">${[1,2].map(n=>`<div class="other-charity" onclick="openLightboxFromEl(this.querySelector('img'))">${imageSlot(`media/ukraine-charity-${n}.png`,'Project for the Serhiy Prytula Charity Foundation')}</div>`).join('')}</div></div></section>`
+};
+caseLayouts['breathing-gallery']=caseLayouts['breathing-gallery'].replace('breathing-reel-3.MOV','breathing-reel-3.mp4').replace(visual,'media/breathing-reel-cover-3.png').replace('video/quicktime','video/mp4');
+Object.entries(caseLayouts).forEach(([galleryId,layout])=>{const gallery=document.getElementById(galleryId);const legacy=gallery&&gallery.closest('.max-w-4xl');if(legacy)legacy.outerHTML=layout});
+document.querySelectorAll('video').forEach(video=>{video.volume=0.5});
+document.querySelectorAll('.luna-newsletter').forEach(newsletter=>newsletter.addEventListener('scroll',()=>{const hint=newsletter.parentElement.querySelector('.luna-scroll-hint');if(hint)hint.style.opacity=newsletter.scrollTop>16?'0':'1'}));
+document.querySelectorAll('.page-section[id^="page-case"] .case-media').forEach(media=>{const title=media.closest('.page-section').querySelector('h1');if(title)title.insertAdjacentElement('afterend',media)});
+document.querySelectorAll('img[src^="media/"]').forEach(img=>img.addEventListener('error',()=>{img.src=img.dataset.fallback||visual},{once:true}));
+const caseOrder=['case-radio','case-breathing','case-reaco','case-luna','case-poster','case-other'];
+const caseNames={'case-radio':'Radio Campus Orléans','case-breathing':'Breathing Academy','case-reaco':'UnivArena','case-luna':'Luna Rossa','case-poster':'Poster Design','case-other':'Other Creative Projects'};
+caseOrder.forEach((current,index)=>{const page=document.getElementById(`page-${current}`);const next=caseOrder[(index+1)%caseOrder.length];const previous=caseOrder[(index-1+caseOrder.length)%caseOrder.length];if(!page)return;page.insertAdjacentHTML('beforeend',`<a href="#${next}" class="case-next" aria-label="Open next case"><span>Next case →</span><span class="case-nav-project">${caseNames[next]}</span></a>`);page.insertAdjacentHTML('beforeend',`<a href="#${previous}" class="case-prev" aria-label="Open previous case"><span>← Previous case</span><span class="case-nav-project">${caseNames[previous]}</span></a>`)});
+
+// English / French interface
+const frenchTranslations={
+ "Creative Portfolio":"Portfolio créatif",
+ "Home":"Accueil",
+ "About":"À propos",
+ "Social Media":"Réseaux sociaux",
+ "Strategy":"Stratégie",
+ "Graphic Design":"Design graphique",
+ "SOCIAL MEDIA • GRAPHIC DESIGN • VIDEO PRODUCTION • BRANDING • CONTENT CREATION":"RÉSEAUX SOCIAUX • DESIGN GRAPHIQUE • PRODUCTION VIDÉO • IDENTITÉ DE MARQUE • CRÉATION DE CONTENU",
+ "View Portfolio":"Voir le portfolio",
+ "Featured Work":"Réalisations",
+ "Poster Design":"Design d’affiches",
+ "Other Creative Projects":"Autres projets créatifs",
+ "Content creation, community management and social-media campaigns.":"Création de contenu, community management et campagnes sur les réseaux sociaux.",
+ "Explore work":"Découvrir les projets",
+ "Brand identity, editorial layouts, posters and print design.":"Identité de marque, mise en page éditoriale, affiches et supports imprimés.",
+ "Why Work With Me":"Ce que je peux vous apporter",
+ "Strategic Communication":"Communication stratégique",
+ "Creating communication strategies that align with business goals and audience needs.":"Création de stratégies de communication alignées sur les objectifs de l’entreprise et les besoins de son public.",
+ "Visual Storytelling":"Narration visuelle",
+ "Designing impactful visual content that communicates clear messages.":"Conception de contenus visuels percutants qui transmettent des messages clairs.",
+ "Social Media Management":"Gestion des réseaux sociaux",
+ "Managing social media platforms with engaging content and consistent branding.":"Gestion des réseaux sociaux avec des contenus engageants et une identité visuelle cohérente.",
+ "Multimedia Production":"Production multimédia",
+ "Producing professional photography, video, motion graphics, and digital content.":"Production de photographies, vidéos, motion design et contenus numériques professionnels.",
+ "Brand Identity":"Identité de marque",
+ "Maintaining cohesive branding across digital and print communication.":"Maintien d’une identité cohérente sur les supports numériques et imprimés.",
+ "Project Management":"Gestion de projet",
+ "Planning, coordinating, and delivering communication projects from concept to execution.":"Planification, coordination et réalisation de projets de communication, du concept à la mise en œuvre.",
+ "Behind the work":"Dans les coulisses",
+ "The person behind":"La personne derrière",
+ "the creative work.":"le travail créatif.",
+ "Discover my background, creative approach and the values I bring to every project.":"Découvrez mon parcours, mon approche créative et les valeurs que j’apporte à chaque projet.",
+ "Good design catches attention.":"Un bon design attire l’attention.",
+ "Great communication builds connection.":"Une excellente communication crée du lien.",
+ "If you've enjoyed exploring my portfolio and connected with the way I think, create, and communicate, I'd love to hear about your project.":"Si mon univers, ma façon de créer et mon approche vous parlent, je serais ravie d’échanger avec vous autour de votre projet.",
+ "Get In Touch":"Me contacter",
+ "About Me":"À propos de moi",
+ "I am a Digital Communication Specialist with an international academic background and professional experience in social media management, visual communication, graphic design, video production, and content creation. My background in Business Economics helps me understand analytics, audience behavior, and the performance of digital campaigns. My studies in Digital Communication have strengthened my creative approach to visual storytelling and strategic communication.":"Je suis spécialisée en communication digitale, avec une approche qui associe création de contenu, réseaux sociaux et communication visuelle. Mon parcours académique international m’a permis de développer un regard ouvert et polyvalent, du graphisme à la production vidéo.\n\nMa formation en économie et gestion me permet de mieux comprendre les données, les comportements des audiences et les performances des campagnes digitales. Mes études en communication numérique ont, quant à elles, enrichi mon approche créative du storytelling visuel et de la communication stratégique.",
+ "In France, I have worked on communication projects in the well-being and health, cultural organizations, media, radio, local businesses, and eSports sectors. These experiences have taught me to adapt my communication style to different audiences while creating clear, engaging, and visually consistent content. I enjoy combining creativity with analytical thinking to develop communication that is both visually engaging and strategically effective.":"En France, j’ai participé à des projets de communication dans des secteurs variés : bien-être et santé, culture, médias, radio, entreprises locales et e-sport. Ces expériences m’ont appris à adapter ma manière de communiquer aux différents publics, tout en créant des contenus clairs, engageants et visuellement cohérents.\n\nJ’aime associer créativité et réflexion analytique afin de concevoir une communication à la fois attractive, pertinente et efficace sur le plan stratégique.",
+ "Download CV":"Télécharger mon CV",
+ "Education":"Formation",
+ "University of Orléans":"Université d’Orléans",
+ "University of Toulon":"Université de Toulon",
+ "National University of Dnipro":"Université nationale de Dnipro",
+ "French Language Certification":"Certification de français",
+ "Master 2 Digital & Editorial Communication":"Master 2 Communication digitale et éditoriale",
+ "Master 2 (Second year completed remotely while living in France)":"Master 2 (deuxième année suivie à distance depuis la France)",
+ "Advertising & Public Relations":"Publicité et relations publiques",
+ "Bachelor's Degree":"Licence",
+ "Business Economics":"Économie d’entreprise",
+ "Certificates":"Certifications",
+ "Fundamentals of Digital Marketing":"Fondamentaux du marketing digital",
+ "Social Media Marketing":"Marketing sur les réseaux sociaux",
+ "DELF B2 French Language Certificate":"Certification de français DELF B2",
+ "Professional Graphic Design Education":"Formation professionnelle en design graphique",
+ "Social Media Content":"Contenus pour les réseaux sociaux",
+ "From content production to final publication across multiple digital platforms.":"De la création à la publication, des contenus adaptés à chaque plateforme.",
+ "Instagram Reels":"Reels Instagram",
+ "Instagram reels":"Reels Instagram",
+ "Short-form video content created for Radio Campus Orléans and Breathing Academy.":"Vidéos créées pour Radio Campus Orléans et Breathing Academy.",
+ "Instagram Stories":"Stories Instagram",
+ "Featured Video":"Vidéo à la une",
+ "Promotional Teaser for UnivArena Esports Tournament Registration":"Teaser promotionnel pour les inscriptions au tournoi e-sport UnivArena",
+ "Email Marketing":"E-mail marketing",
+ "Newsletters designed with Mailjet for company communications, event announcements, and audience engagement.":"Newsletters conçues avec Mailjet pour la communication d’entreprise, les annonces d’événements et l’engagement du public.",
+ "Content Creation":"Création de contenu",
+ "Photography":"Photographie",
+ "Producing visual content adapted to each brand.":"Production de contenus visuels adaptés à chaque marque.",
+ "Video Production":"Production vidéo",
+ "Filming content for social media platforms.":"Tournage de contenus pour les réseaux sociaux.",
+ "Editing":"Montage",
+ "Editing videos and adapting content for different formats.":"Montage vidéo et adaptation des contenus aux différents formats.",
+ "Publishing":"Publication",
+ "Preparing content for publication according to the communication plan.":"Préparation des contenus selon le plan de communication.",
+ "Discover My Content Strategy":"Découvrir ma stratégie de contenu",
+ "Content Strategy":"Stratégie de contenu",
+ "Building structured communication plans before creating content.":"Élaborer une stratégie de communication structurée avant de passer à la création de contenu.",
+ "My Strategic Process":"Mon processus stratégique",
+ "Business Discovery":"Découverte de l’entreprise",
+ "Target Audience":"Public cible",
+ "Competitor Analysis":"Analyse de la concurrence",
+ "Content Ideas":"Idées de contenu",
+ "Editorial Calendar":"Calendrier éditorial",
+ "Content Production":"Production de contenu",
+ "Featured Strategy Projects":"Projets stratégiques sélectionnés",
+ "Business overview • Unique Value Proposition • Target Audience • Social Media Strategy • Content Ideas • Editorial Calendar":"Présentation de l’entreprise • Proposition de valeur unique • Public cible • Stratégie réseaux sociaux • Idées de contenu • Calendrier éditorial",
+ "Explore the Strategy":"Découvrir la stratégie",
+ "Business overview • Competitor Analysis • Target Audience • Content Ideas • Editorial Calendar":"Présentation de l’entreprise • Analyse de la concurrence • Public cible • Idées de contenu • Calendrier éditorial",
+ "Strategy Documents":"Documents stratégiques",
+ "What I Deliver":"Ce que je propose",
+ "Business Analysis":"Analyse de l’entreprise",
+ "Understanding each brand before creating content.":"Comprendre chaque marque avant de créer du contenu.",
+ "Defining the right audience for every platform.":"Définir le public adapté à chaque plateforme.",
+ "Competitor Research":"Étude de la concurrence",
+ "Identifying opportunities and content positioning.":"Identifier les opportunités et le positionnement éditorial.",
+ "Building platform-specific communication plans.":"Construire des plans de communication adaptés à chaque plateforme.",
+ "Developing creative concepts aligned with brand objectives.":"Développer des concepts créatifs alignés sur les objectifs de la marque.",
+ "Editorial Planning":"Planification éditoriale",
+ "Creating organized monthly content calendars.":"Créer des calendriers de contenu mensuels structurés.",
+ "See the Content in Action":"Voir le contenu en action",
+ "Visual communication through thoughtful and impactful design":"Une communication visuelle réfléchie et percutante",
+ "Large Format":"Grand format",
+ "Poster Collection":"Collection d’affiches",
+ "Print Design":"Design imprimé",
+ "Large Format Design":"Design grand format",
+ "Immersive large-format communication materials emphasizing scale and impact.":"Supports de communication immersifs en grand format, conçus pour renforcer l’échelle et l’impact.",
+ "Printed communication materials including banners, forms, invitations, flyers, booklets, and catalogues.":"Supports de communication imprimés : bannières, formulaires, invitations, flyers, brochures et catalogues.",
+ "Design Approach":"Approche créative",
+ "Visual Communication":"Communication visuelle",
+ "Typography":"Typographie",
+ "Editorial Layout":"Mise en page éditoriale",
+ "Have a project in mind?":"Vous avez un projet en tête ?",
+ "Let’s Collaborate":"Collaborons ensemble",
+ "Project Overview":"Présentation du projet",
+ "Challenge":"Défi",
+ "My Role":"Mon rôle",
+ "Process":"Processus",
+ "Final Outcome":"Résultats",
+ "A university esports tournament organized for students, supported by FEDET, featuring a League of Legends competition with both on-site matches and a Twitch livestream. The project aimed to bring students together around digital culture, build an engaged community, and increase event visibility through strategic communication and visual content.":"Un tournoi universitaire d’e-sport organisé pour les étudiants avec le soutien de la FEDET, autour d’une compétition League of Legends combinant matchs sur place et diffusion en direct sur Twitch. Le projet visait à rassembler les étudiants autour de la culture numérique, à créer une communauté engagée et à renforcer la visibilité de l’événement grâce à une communication stratégique et des contenus visuels.",
+ "Launching a new university esports event required building awareness from scratch and attracting a large student audience in a competitive digital environment. The main objective was to reach 200 participants, create excitement around the League of Legends tournament, and establish a consistent communication strategy across multiple platforms.":"Le lancement d’un nouvel événement universitaire d’e-sport nécessitait de construire sa notoriété de zéro et d’attirer un large public étudiant dans un environnement numérique très concurrentiel. L’objectif principal était d’atteindre 200 participants, de créer de l’enthousiasme autour du tournoi League of Legends et d’établir une stratégie de communication cohérente sur plusieurs plateformes.",
+ "As Digital Communication Manager, I developed the communication strategy, managed digital promotion, and created visual content to support the tournament's growth.":"En tant que responsable de la communication digitale, j’ai développé la stratégie de communication, géré la promotion numérique et créé les contenus visuels pour accompagner le développement du tournoi.",
+ "Built the event's visual identity and communication strategy by creating Instagram content (posts and stories), promotional posters, roll-up banners, and a teaser video distributed across university campuses in two cities.":"J’ai construit l’identité visuelle et la stratégie de communication de l’événement en créant des contenus Instagram (publications et stories), des affiches promotionnelles, des roll-ups et une vidéo teaser diffusée sur les campus universitaires de deux villes.",
+ "The campaign exceeded the initial goal, achieving 450+ registrations and successfully establishing a strong digital identity for a new university esports initiative. The project successfully combined digital and offline communication, creating a recognizable visual identity across social media, campus materials, and the Twitch livestream experience.":"La campagne a dépassé l’objectif initial avec plus de 450 inscriptions et a permis d’établir une identité numérique forte pour cette nouvelle initiative universitaire d’e-sport. Le projet a associé communication digitale et supports physiques, avec une identité visuelle reconnaissable sur les réseaux sociaux, les campus et la diffusion Twitch.",
+ "Explore more graphic design created for this project.":"Découvrez d’autres créations graphiques réalisées pour ce projet.",
+ "Explore Graphic Design":"Découvrir le design graphique",
+ "Breathing Academy is a French institute specializing in functional breathing education, offering professional trainings, courses, workshops, and immersive experiences.":"Breathing Academy est un institut français spécialisé dans l’apprentissage de la respiration fonctionnelle, proposant des formations professionnelles, des cours, des ateliers et des expériences immersives.",
+ "The project focused on strengthening the Academy's digital communication, maintaining consistent branding, and promoting its educational programs through websites, social media, email campaigns, and offline materials.":"Le projet visait à renforcer la communication digitale de l’Academy, à maintenir une identité cohérente et à promouvoir ses programmes pédagogiques à travers les sites web, les réseaux sociaux, les campagnes e-mail et les supports imprimés.",
+ "As Digital Communications Manager & Web Content Assistant, I created visual content and supported website management. I developed content strategies, updated two WordPress websites, produced photo and video content, and designed digital and print materials.":"En tant que responsable de la communication digitale et assistante web content, j’ai créé des contenus visuels et participé à la gestion des sites web. J’ai développé des stratégies de contenu, mis à jour deux sites WordPress, produit des photos et des vidéos, et conçu des supports numériques et imprimés.",
+ "Created social media content including posts, Stories, and Reels; produced and edited photo/video materials; updated website content; designed newsletters via Mailjet; and developed promotional assets such as flyers, brochures, roll-up banners, and other printed materials.":"J’ai créé des publications, stories et Reels pour les réseaux sociaux, produit et monté des contenus photo et vidéo, actualisé les sites web, conçu des newsletters avec Mailjet et développé des supports promotionnels tels que flyers, brochures, roll-ups et autres imprimés.",
+ "Strengthened Breathing Academy's social media presence by developing a promotion strategy, introducing new content formats and recurring rubrics, and creating consistent visual communication. The project improved the brand's positioning, increased online visibility, and helped build a stronger connection with the audience across digital channels.":"J’ai renforcé la présence de Breathing Academy sur les réseaux sociaux grâce à une stratégie de promotion, de nouveaux formats et des rubriques récurrentes, ainsi qu’à une communication visuelle cohérente. Le projet a amélioré le positionnement de la marque, accru sa visibilité en ligne et créé un lien plus fort avec son public.",
+ "Discover more multimedia content created for this project.":"Découvrez davantage de contenus multimédias créés pour ce projet.",
+ "Explore Social Media":"Découvrir les réseaux sociaux",
+ "Radio Campus Orléans is an independent radio station with a large community of presenters, broadcasting continuously and actively participating in cultural events, festivals, and local initiatives. The project involved supporting the station's media production and digital communication through content creation and event coverage.":"Radio Campus Orléans est une radio indépendante portée par une grande communauté d’animateurs et d’animatrices. Elle diffuse ses programmes en continu et participe activement à la vie culturelle locale à travers de nombreux événements, festivals et initiatives.\n\nMa mission était d’accompagner la radio dans sa production média et sa communication digitale, notamment par la création de contenus et la couverture d’événements.",
+ "The challenge was to capture the energy of live events and transform it into engaging digital content while supporting the station's communication needs and maintaining a strong connection with its audience and cultural partners.":"Retranscrire l’énergie des événements en direct à travers des contenus digitaux attractifs, tout en répondant aux besoins de communication de la radio et en renforçant ses liens avec le public et les partenaires culturels.",
+ "As a Digital Content Creator, I was responsible for producing multimedia content and supporting the station's digital communication. I created photo and video content, developed social media materials, wrote website articles, and managed communication with artists during interviews and events.":"En tant que créatrice de contenu digital, j’ai contribué à la production multimédia et à la communication en ligne de la radio. J’ai réalisé des contenus photo et vidéo, conçu des supports pour les réseaux sociaux, rédigé des articles pour le site web et assuré les échanges avec les artistes lors des interviews et des événements.",
+ "Captured and edited photo/video content during events, created social media materials, and wrote website articles to highlight the station's activities. Coordinated with artists during interviews and supported radio productions through technical preparation and event setup.":"Lors des événements, j’ai réalisé puis monté des contenus photo et vidéo destinés aux différents canaux de communication de la radio. J’ai également créé des publications pour les réseaux sociaux et rédigé des articles afin de valoriser ses activités.\n\nEn parallèle, j’ai coordonné les échanges avec les artistes pendant les interviews et participé à la préparation technique des productions radiophoniques et des événements.",
+ "Enhanced Radio Campus Orléans' digital communication by creating engaging multimedia content, showcasing cultural events, and strengthening the connection between the radio station, artists, and its audience.":"Mon travail a permis d’enrichir la communication digitale de Radio Campus Orléans, de mettre en valeur les événements culturels couverts par la radio et de renforcer les liens entre la station, les artistes et son public.",
+ "Want to see more content created for this project?":"Vous souhaitez découvrir davantage de contenus créés pour ce projet ?",
+ "Luna Rossa Production is an entertainment company that provides professional entertainers and performers for a wide range of private and corporate events. Through themed performances, interactive activities, and live entertainment, the company creates engaging and memorable experiences for its audiences.":"Luna Rossa Production est une entreprise spécialisée dans l’animation événementielle. Elle propose les services d’animateurs et d’artistes professionnels pour des événements privés et professionnels, à travers des spectacles thématiques, des animations et des expériences interactives.",
+ "The goal was to strengthen the company’s digital presence, showcase its services more effectively, and develop a consistent visual identity that reflected the creativity and energy of its events.":"L’objectif était de développer la présence en ligne de l’entreprise, de valoriser ses prestations et de construire une communication visuelle cohérente, capable de refléter la créativité et l’énergie de ses événements.",
+ "As a Social Media & Content Specialist, I managed Luna Rossa Production’s digital communication across Instagram and TikTok. My responsibilities included content creation, visual production, video editing, publishing, and social media management, with a focus on increasing brand visibility and audience engagement.":"En tant que spécialiste des réseaux sociaux et de la création de contenu, j’ai pris en charge la communication digitale de Luna Rossa Production sur Instagram et TikTok. J’ai créé, adapté et publié des contenus visuels, réalisé des montages vidéo et assuré la gestion des réseaux sociaux afin d’accroître la visibilité de la marque et de favoriser l’engagement de son audience.",
+ "I produced and edited photo and video content, managed Instagram and TikTok publications, and designed promotional assets, including banners and campaign visuals. I adapted each piece of content to the specific requirements of each platform while maintaining a consistent brand identity.\n\nI also supported the promotion of the company’s services through organic content and targeted Facebook Ads and TikTok Ads campaigns.":"J’ai réalisé et monté des contenus photo et vidéo pour les réseaux sociaux, planifié les publications sur Instagram et TikTok et conçu différents supports visuels, notamment des bannières et des éléments promotionnels.\n\nJ’ai adapté les formats aux spécificités de chaque plateforme, veillé à la cohérence de l’identité visuelle et participé à la promotion des prestations à travers des campagnes Facebook Ads et TikTok Ads.",
+ "The project strengthened Luna Rossa Production’s online presence through more consistent social media communication and a clearer visual identity. The combination of organic content and targeted advertising increased the visibility of its services and presented the brand’s creative universe more effectively across digital platforms.":"Ce travail a permis de consolider la présence en ligne de Luna Rossa Production grâce à une communication plus cohérente sur les réseaux sociaux, à une meilleure mise en valeur de son univers visuel et à une visibilité accrue de ses prestations, aussi bien à travers les contenus organiques que les campagnes publicitaires ciblées.",
+ "See more social media content created for this project.":"Découvrez davantage de contenus créés pour les réseaux sociaux de ce projet.",
+ "A graphic design project created during a design course at Projector Institute in Ukraine, focused on exploring the relationship between visual communication and urban culture. The task was to transform poetry and song lyrics into a series of posters designed for public spaces in Kyiv.":"Un projet de design graphique réalisé pendant une formation au Projector Institute en Ukraine, consacré à la relation entre communication visuelle et culture urbaine. L’objectif était de transformer des poèmes et paroles de chansons en une série d’affiches destinées aux espaces publics de Kyiv.",
+ "The challenge was to translate abstract ideas, emotions, and literary references into strong visual concepts that could communicate with an urban audience. The goal was to create posters that were not only visually appealing but also meaningful, recognizable, and suitable for both print and digital formats.":"Le défi consistait à traduire des idées abstraites, des émotions et des références littéraires en concepts visuels forts capables de parler à un public urbain. Les affiches devaient être esthétiques, porteuses de sens, reconnaissables et adaptées aux formats imprimés comme numériques.",
+ "As a graphic design student, I developed a complete poster series from concept development to final production. I worked on visual research, sketches, composition, typography, and illustration while applying design principles learned with a mentor.":"En tant qu’étudiante en design graphique, j’ai développé une série complète d’affiches, de la recherche conceptuelle à la production finale. J’ai travaillé sur la recherche visuelle, les croquis, la composition, la typographie et l’illustration, en appliquant les principes étudiés avec mon mentor.",
+ "The project followed a complete design workflow, starting with concept development and visual exploration, followed by sketches, composition experiments, and digital execution in Adobe Illustrator. I prepared the final artworks for both printed materials and digital use, considering technical requirements for different formats.":"Le projet a suivi un processus complet : développement du concept, exploration visuelle, croquis, expérimentations de composition puis réalisation numérique dans Adobe Illustrator. J’ai préparé les créations finales pour l’impression et les usages numériques en tenant compte des contraintes techniques propres à chaque format.",
+ "Created a series of 10 original posters combining poetry, music, and visual storytelling. The project strengthened my skills in conceptual design, typography, illustration, and preparing graphic materials for real-world applications in urban environments.":"J’ai créé une série de 10 affiches originales associant poésie, musique et narration visuelle. Ce projet a renforcé mes compétences en design conceptuel, typographie, illustration et préparation de supports graphiques destinés à des applications concrètes dans l’espace urbain.",
+ "Browse the complete poster collection.":"Découvrez l’ensemble de la collection d’affiches.",
+ "My Approach":"Mon approche",
+ "I enjoy working with projects from very different fields, including health and wellness, restaurants, education, culture and charitable initiatives. Before creating a design, I take the time to understand the company’s positioning, values, audience and the real purpose behind the project. This helps me create visual solutions that feel authentic to each client and communicate what truly matters to them in a clear and thoughtful way.":"Je prends particulièrement plaisir à travailler sur des projets issus d’univers très différents, notamment dans les domaines de la santé et du bien-être, de la restauration, de l’éducation, de la culture et de l’engagement solidaire. Avant de concevoir une identité ou un support visuel, je prends le temps de comprendre le positionnement de l’entreprise, ses valeurs, son public et les objectifs du projet. Cette approche me permet de créer des solutions visuelles authentiques et adaptées à chaque client, qui traduisent clairement son identité et son message.",
+ "Interested in working with me?":"Vous souhaitez travailler avec moi ?",
+ "Let’s talk about your project and create something thoughtful together.":"Parlons de votre projet et créons ensemble quelque chose de pertinent.",
+ "Contact Me":"Me contacter",
+ "Let's Work Together":"Travaillons ensemble",
+ "I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.":"Je suis toujours disponible pour échanger autour de nouveaux projets, d’idées créatives ou d’opportunités de contribuer à votre vision.",
+ "Name":"Nom",
+ "Phone":"Téléphone",
+ "Message":"Message",
+ "Your message":"Votre message",
+ "Send Message":"Envoyer le message",
+ "Sending…":"Envoi…",
+ "Sent ✓":"Envoyé ✓",
+ "Thank you. Your message has been sent.":"Merci. Votre message a bien été envoyé.",
+ "The message could not be sent. Please email me at yuliia.diachenko.dp@gmail.com.":"Le message n’a pas pu être envoyé. Vous pouvez m’écrire à yuliia.diachenko.dp@gmail.com.",
+ "Stories":"Stories",
+ "Newsletter":"Newsletter",
+ "Print materials":"Supports imprimés",
+ "Featured article":"Article à la une",
+ "Click either visual to open the Reel on Instagram.":"Cliquez sur l’un des visuels pour ouvrir le Reel sur Instagram.",
+ "An article published by Radio Campus Orléans.":"Un article publié par Radio Campus Orléans.",
+ "Read article →":"Lire l’article →",
+ "UnivArena on Instagram":"UnivArena sur Instagram",
+ "View @univarena":"Voir @univarena",
+ "Campaign Video":"Vidéo de campagne",
+ "A campaign visible across campus":"Une campagne visible sur les campus",
+ "The campaign video was shown across all university campuses, extending the project beyond social media and into the university’s physical spaces.":"La vidéo de campagne a été diffusée sur l’ensemble des campus universitaires, prolongeant le projet au-delà des réseaux sociaux jusque dans les espaces physiques de l’université.",
+ "Campaign Across Campus":"Campagne sur les campus",
+ "Printed Materials · Roll-ups":"Supports imprimés · Roll-ups",
+ "Printed Materials · Posters":"Supports imprimés · Affiches",
+ "Video content":"Contenu vidéo",
+ "Instagram Account Statistics":"Statistiques du compte Instagram",
+ "Scroll down":"Faire défiler",
+ "Poster collection":"Collection d’affiches",
+ "Countries & Traditions · Animated Book":"Pays et traditions · Livre animé",
+ "Sanary Town Hall · Social Media Posts":"Mairie de Sanary · Publications réseaux sociaux",
+ "LostInBerry · Norwegian Chocolate Strawberries":"LostInBerry · Fraises au chocolat norvégiennes",
+ "Café Projects":"Projets de cafés",
+ "Le Bouillon · Ticketing":"Le Bouillon · Billetterie",
+ "Project for the Serhiy Prytula Charity Foundation":"Projet pour la fondation caritative Serhiy Prytula",
+ "Next case →":"Projet suivant →",
+ "← Previous case":"← Projet précédent"
+};
+const englishTranslations=Object.fromEntries(Object.entries(frenchTranslations).map(([en,fr])=>[fr,en]));
+let currentLanguage='en';
+function translatePhrase(text){return currentLanguage==='fr'?(frenchTranslations[text]||text):(englishTranslations[text]||text)}
+function applyLanguage(language){
+ currentLanguage=language==='fr'?'fr':'en';
+ const source=currentLanguage==='fr'?frenchTranslations:englishTranslations;
+ const normalizeText=value=>value.trim().replace(/\s+/g,' ');
+ const normalizedSource=Object.fromEntries(Object.entries(source).map(([key,value])=>[normalizeText(key),value]));
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{if(['SCRIPT','STYLE'].includes(node.parentElement?.tagName))return;const raw=node.nodeValue;const original=raw.trim();const key=normalizeText(original);if(normalizedSource[key])node.nodeValue=raw.replace(original,normalizedSource[key])});
+ document.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>['placeholder','title','aria-label'].forEach(attr=>{const value=el.getAttribute(attr);if(value&&source[value])el.setAttribute(attr,source[value])}));
+ document.documentElement.lang=currentLanguage;
+ document.title=currentLanguage==='fr'?'Portfolio créatif — Yuliia Diachenko':'Creative Portfolio — Yuliia Diachenko';
+ const aboutWorkspace=document.querySelector('[data-template-id="about-workspace-img"]');
+ if(aboutWorkspace){const languageImage=currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png';if(aboutWorkspace.getAttribute('src')!==languageImage)aboutWorkspace.setAttribute('src',languageImage)}
+ const aboutWorkspaceOverlay=document.querySelector('[data-template-id="about-workspace-overlay"]');
+ if(aboutWorkspaceOverlay)aboutWorkspaceOverlay.style.backgroundColor=currentLanguage==='fr'?'rgba(0,0,0,.42)':'rgba(0,0,0,.20)';
+ const scopedLanguageCopy={
+  'strategy-step-1':['Business Discovery','Découverte de l’entreprise'],
+  'strategy-step-2':['Target Audience','Définition du public cible'],
+  'strategy-step-3':['Competitor Analysis','Analyse de la concurrence'],
+  'strategy-step-4':['Content Strategy','Stratégie de contenu'],
+  'strategy-step-5':['Content Ideas','Recherche d’idées de contenu'],
+  'strategy-step-6':['Editorial Calendar','Calendrier éditorial'],
+  'strategy-step-7':['Content Production','Production de contenu'],
+  'strategy-step-8':['Publishing','Publication']
+ };
+ Object.entries(scopedLanguageCopy).forEach(([templateId,copy])=>{const element=document.querySelector(`[data-template-id="${templateId}"]`);if(element)element.textContent=currentLanguage==='fr'?copy[1]:copy[0]});
+ document.querySelectorAll('[data-language-toggle]').forEach(button=>{button.textContent=currentLanguage==='fr'?'FR':'EN';button.setAttribute('aria-label',currentLanguage==='fr'?'Switch to English':'Passer au français')});
+ localStorage.setItem('portfolio-language',currentLanguage);
+}
+document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEventListener('click',()=>applyLanguage(currentLanguage==='fr'?'en':'fr')));
+applyLanguage(localStorage.getItem('portfolio-language')||'en');
+
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1972a0976ec8e59',t:'MTc4Mzc2NjE1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body></html>
+
+
