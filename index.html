@@ -1103,7 +1103,59 @@ const placeholders=[
   'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80'
 ];
 document.querySelectorAll('img[src^="canva://"]').forEach((img,index)=>{img.src=placeholders[index%placeholders.length]});
-// Automatic image bindings. Replace a file in /media using the README name and reload the page.
+// Prefer the lightweight WebP copies uploaded to the repository root.
+const optimizedMedia={
+ 'media/about-portrait.png':'about-portrait.webp',
+ 'media/breathing-print-2.png':'breathing-print-2.webp',
+ 'media/cafe-project-1.png':'cafe-project-1.webp',
+ 'media/cafe-project-2.png':'cafe-project-2.webp',
+ 'media/graphic-large-1.png':'graphic-large-1.webp',
+ 'media/graphic-large-2.png':'graphic-large-2.webp',
+ 'media/graphic-large-3.png':'graphic-large-3.webp',
+ 'media/graphic-poster-1.png':'graphic-poster-1.webp',
+ 'media/graphic-poster-2.png':'graphic-poster-2.webp',
+ 'media/graphic-poster-3.png':'graphic-poster-3.webp',
+ 'media/graphic-poster-4.png':'graphic-poster-4.webp',
+ 'media/graphic-poster-6.png':'graphic-poster-6.webp',
+ 'media/graphic-print-2.png':'graphic-print-2.webp',
+ 'media/graphic-print-3.png':'graphic-print-3.webp',
+ 'media/graphic-print-4.png':'graphic-print-4.webp',
+ 'media/graphic-print-6.png':'graphic-print-6.webp',
+ 'media/graphic-print-7.png':'graphic-print-7.webp',
+ 'media/graphic-print-8.png':'graphic-print-8.webp',
+ 'media/graphic-print-9.png':'graphic-print-9.webp',
+ 'media/home-category-graphic.png':'home-category-graphic.webp',
+ 'media/home-category-social.png':'home-category-social.webp',
+ 'media/home-featured-other.png':'home-featured-other.webp',
+ 'media/home-featured-poster.png':'home-featured-poster.webp',
+ 'media/le-bouillon.png':'le-bouillon.webp',
+ 'media/lostinberry-1.png':'lostinberry-1.webp',
+ 'media/poster-1.png':'poster-1.webp',
+ 'media/poster-2.png':'poster-2.webp',
+ 'media/poster-3.png':'poster-3.webp',
+ 'media/poster-wide-1.png':'poster-wide-1.webp',
+ 'media/print affiche (1).png':'print affiche (1).webp',
+ 'media/reaco (3).png':'reaco (3).webp',
+ 'media/reaco-instagram.png':'reaco-instagram.webp',
+ 'media/reaco-poster-1.png':'reaco-poster-1.webp',
+ 'media/reaco-poster-2.png':'reaco-poster-2.webp',
+ 'media/reaco-rollup-1.png':'reaco-rollup-1.webp',
+ 'media/reaco-rollup-2.png':'reaco-rollup-2.webp',
+ 'media/social-hero.png':'social-hero.webp',
+ 'media/strategy-case-1.png':'strategy-case-1.webp',
+ 'media/strategy-hero.png':'strategy-hero.webp',
+ 'media/ukraine-charity-1.png':'ukraine-charity-1.webp',
+ 'media/vector-1.png':'vector-1.webp'
+};
+const optimizedPath=src=>optimizedMedia[src]||src;
+const applyOptimizedImages=root=>root.querySelectorAll('img[src]').forEach(img=>{
+ const original=img.getAttribute('src');
+ const optimized=optimizedPath(original);
+ if(optimized===original)return;
+ img.onerror=()=>{img.onerror=null;img.src=original};
+ img.src=optimized;
+});
+// Automatic image bindings. Replace a file using the README name and reload the page.
 const automaticMedia={
  'hero-bg-image':'media/home-hero.webp',
  'project-1-img':'media/home-featured-radio.png',
@@ -1142,7 +1194,7 @@ Object.entries(automaticMedia).forEach(([templateId,path])=>{
  if(!img)return;
  const fallback=img.getAttribute('src');
  img.onerror=()=>{img.onerror=null;img.src=fallback};
- img.src=path;
+ img.src=optimizedPath(path);
 });
 // Ensure the Print Design assets load even before the Graphic Design section becomes visible.
 document.querySelectorAll('#gd-print-design img').forEach(img=>{img.loading='eager';img.src=img.getAttribute('src')});
@@ -1160,7 +1212,7 @@ const poster='https://images.pexels.com/photos/164755/pexels-photo-164755.jpeg?a
 const visual='https://images.pexels.com/photos/3850271/pexels-photo-3850271.jpeg?auto=compress&cs=tinysrgb&w=900';
 const eventPhoto='https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=900';
 const videoSlot=(src,cover=poster,type='video/mp4')=>`<video controls playsinline preload="metadata"${cover?` poster="${cover}"`:''}><source src="${src}" type="${type}"></video>`;
-const imageSlot=(src,alt='Project visual')=>`<img src="${src}" alt="${alt}" loading="lazy">`;
+const imageSlot=(src,alt='Project visual')=>`<img src="${optimizedPath(src)}" alt="${alt}" loading="lazy">`;
 const storyFallbacks=['https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=900','https://images.pexels.com/photos/3822864/pexels-photo-3822864.jpeg?auto=compress&cs=tinysrgb&w=900','https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=900'];
 const storySlot=(src,index)=>`<img src="${src}" data-fallback="${storyFallbacks[index]}" alt="Breathing Academy story" loading="lazy">`;
 const caseLayouts={
@@ -1173,6 +1225,7 @@ const caseLayouts={
 };
 caseLayouts['breathing-gallery']=caseLayouts['breathing-gallery'].replace('breathing-reel-3.MOV','breathing-reel-3.mp4').replace(visual,'media/breathing-reel-cover-3.png').replace('video/quicktime','video/mp4');
 Object.entries(caseLayouts).forEach(([galleryId,layout])=>{const gallery=document.getElementById(galleryId);const legacy=gallery&&gallery.closest('.max-w-4xl');if(legacy)legacy.outerHTML=layout});
+applyOptimizedImages(document);
 document.querySelectorAll('video').forEach(video=>{video.volume=0.5});
 document.querySelectorAll('.luna-newsletter').forEach(newsletter=>newsletter.addEventListener('scroll',()=>{const hint=newsletter.parentElement.querySelector('.luna-scroll-hint');if(hint)hint.style.opacity=newsletter.scrollTop>16?'0':'1'}));
 document.querySelectorAll('.page-section[id^="page-case"] .case-media').forEach(media=>{const title=media.closest('.page-section').querySelector('h1');if(title)title.insertAdjacentElement('afterend',media)});
