@@ -1139,6 +1139,7 @@ const caseLayouts={
 };
 caseLayouts['breathing-gallery']=caseLayouts['breathing-gallery'].replace('breathing-reel-3.MOV','breathing-reel-3.mp4').replace(visual,'media/breathing-reel-cover-3.png').replace('video/quicktime','video/mp4');
 Object.entries(caseLayouts).forEach(([galleryId,layout])=>{const gallery=document.getElementById(galleryId);const legacy=gallery&&gallery.closest('.max-w-4xl');if(legacy)legacy.outerHTML=layout});
+document.querySelectorAll('.poster-mosaic img').forEach(img=>{img.style.cursor='zoom-in';img.addEventListener('click',()=>openLightboxFromEl(img))});
 document.querySelectorAll('video').forEach(video=>{video.volume=0.5});
 document.querySelectorAll('.luna-newsletter').forEach(newsletter=>newsletter.addEventListener('scroll',()=>{const hint=newsletter.parentElement.querySelector('.luna-scroll-hint');if(hint)hint.style.opacity=newsletter.scrollTop>16?'0':'1'}));
 document.querySelectorAll('.page-section[id^="page-case"] .case-media').forEach(media=>{const title=media.closest('.page-section').querySelector('h1');if(title)title.insertAdjacentElement('afterend',media)});
