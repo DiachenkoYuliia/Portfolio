@@ -17,6 +17,9 @@
 .fade-in.visible{opacity:1;transform:translateY(0)}
 .project-card:hover .project-overlay{opacity:1}
 .project-overlay{opacity:0;transition:opacity 0.4s ease}
+.hero-bg-image{opacity:0;transition:opacity .9s ease}
+.hero-bg-image.is-loaded{opacity:.3}
+@media(prefers-reduced-motion:reduce){.hero-bg-image{transition:none}}
 .page-section{display:none;opacity:0;transition:opacity 0.4s ease}
 .page-section.active{display:block;opacity:1}
 html{scroll-behavior:smooth}
@@ -93,7 +96,7 @@ html{scroll-behavior:smooth}
   <section id="page-home" class="page-section active pt-20">
    <div class="relative w-full" style="min-height:calc(90 * min(var(--vh,1vh),1vh))">
     <div class="absolute inset-0 overflow-hidden">
-     <img data-template-id="hero-bg-image" class="canva-image w-full h-full object-cover opacity-30" loading="lazy" src="canva://MAE-YkwrOws/1" alt="Minimalist abstract pattern with overlapping geometric shapes in black and white">
+     <img data-template-id="hero-bg-image" class="canva-image hero-bg-image w-full h-full object-cover" loading="eager" fetchpriority="high" src="media/home-hero.webp" onload="this.classList.add('is-loaded')" alt="Minimalist abstract pattern with overlapping geometric shapes in black and white">
     </div>
     <div class="relative z-10 flex flex-col items-center justify-center text-center px-6" style="min-height:calc(90 * min(var(--vh,1vh),1vh))">
      <h1 data-template-id="hero-title" class="canva-text text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-6" style="color: rgb(255, 255, 255); font-weight: 900; font-style: normal; font-size: 32px;">YULIIA DIACHENKO</h1>
@@ -1068,7 +1071,7 @@ const placeholders=[
 document.querySelectorAll('img[src^="canva://"]').forEach((img,index)=>{img.src=placeholders[index%placeholders.length]});
 // Automatic image bindings. Replace a file in /media using the README name and reload the page.
 const automaticMedia={
- 'hero-bg-image':'media/home-hero.png',
+ 'hero-bg-image':'media/home-hero.webp',
  'project-1-img':'media/home-featured-radio.png',
  'project-2-img':'media/home-featured-breathing.png',
  'project-3-img':'media/home-featured-reaco.png',
