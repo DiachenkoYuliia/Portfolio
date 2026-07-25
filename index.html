@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="fr"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creative Portfolio</title>
+  <title>Portfolio créatif — Yuliia Diachenko</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
@@ -1432,7 +1432,7 @@ const frenchTranslations={
  "← Previous case":"← Projet précédent"
 };
 const englishTranslations=Object.fromEntries(Object.entries(frenchTranslations).map(([en,fr])=>[fr,en]));
-let currentLanguage='en';
+let currentLanguage='fr';
 function translatePhrase(text){return currentLanguage==='fr'?(frenchTranslations[text]||text):(englishTranslations[text]||text)}
 function updateAboutWorkspaceImage(){
  const aboutWorkspace=document.querySelector('[data-template-id="about-workspace-img"]');
@@ -1482,11 +1482,11 @@ function applyLanguage(language){
  };
  Object.entries(scopedLanguageCopy).forEach(([templateId,copy])=>{const element=document.querySelector(`[data-template-id="${templateId}"]`);if(element)element.textContent=currentLanguage==='fr'?copy[1]:copy[0]});
  document.querySelectorAll('[data-language-toggle]').forEach(button=>{button.textContent=currentLanguage==='fr'?'FR':'EN';button.setAttribute('aria-label',currentLanguage==='fr'?'Switch to English':'Passer au français')});
- localStorage.setItem('portfolio-language',currentLanguage);
+ localStorage.setItem('portfolio-language-v2',currentLanguage);
 }
 document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEventListener('click',()=>applyLanguage(currentLanguage==='fr'?'en':'fr')));
 window.matchMedia('(max-width: 640px)').addEventListener('change',updateAboutWorkspaceImage);
-applyLanguage(localStorage.getItem('portfolio-language')||'en');
+applyLanguage(localStorage.getItem('portfolio-language-v2')||'fr');
 
 lucide.createIcons();
 </script>
