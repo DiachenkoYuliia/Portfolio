@@ -282,28 +282,27 @@ I enjoy combining creativity with analytical thinking to develop communication t
       <div class="timeline-dot absolute -left-10 top-1"></div>
       <p data-template-id="edu-1-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2025–2026</p>
       <h3 data-template-id="edu-1-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Orléans</h3>
-      <p data-template-id="edu-1-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">French Language Certification</p>
+      <p data-template-id="edu-1-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">French as a Foreign Language</p>
       <p data-template-id="edu-1-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">DELF B2</p>
      </div>
      <div class="mb-12 relative">
       <div class="timeline-dot absolute -left-10 top-1"></div>
       <p data-template-id="edu-2-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2022–2024</p>
       <h3 data-template-id="edu-2-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Toulon</h3>
-      <p data-template-id="edu-2-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2
-Digital &amp; Editorial Communication</p>
+      <p data-template-id="edu-2-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2 in Digital and Editorial Communication</p>
      </div>
      <div class="mb-12 relative">
       <div class="timeline-dot absolute -left-10 top-1"></div>
       <p data-template-id="edu-3-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2021–2023</p>
-      <h3 data-template-id="edu-3-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">University of Toulon</h3>
-      <p data-template-id="edu-3-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2 (Second year completed remotely while living in France)</p>
-      <p data-template-id="edu-3-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Advertising &amp; Public Relations</p>
+      <h3 data-template-id="edu-3-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">National University of Dnipro</h3>
+      <p data-template-id="edu-3-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Master 2 in Advertising and Public Relations</p>
+      <p data-template-id="edu-3-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Second year completed remotely</p>
      </div>
      <div class="relative">
       <div class="timeline-dot absolute -left-10 top-1"></div>
       <p data-template-id="edu-4-year" class="canva-text text-sm font-semibold mb-1" style="color: rgb(232, 168, 56); font-weight: 600; font-style: normal; font-size: 16px;">2017–2021</p>
       <h3 data-template-id="edu-4-school" class="canva-text font-bold mb-1" style="color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 19px;">National University of Dnipro</h3>
-      <p data-template-id="edu-4-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Bachelor's Degree</p>
+      <p data-template-id="edu-4-degree" class="canva-text text-white/60 text-sm" style="color: rgb(204, 204, 204); font-weight: 400; font-style: normal; font-size: 16px;">Bachelor’s Degree</p>
       <p data-template-id="edu-4-field" class="canva-text text-white/50 text-sm" style="color: rgb(153, 153, 153); font-weight: 400; font-style: normal; font-size: 16px;">Business Economics</p>
      </div>
     </div>
@@ -1456,6 +1455,22 @@ function applyLanguage(language){
  const aboutWorkspaceOverlay=document.querySelector('[data-template-id="about-workspace-overlay"]');
  if(aboutWorkspaceOverlay)aboutWorkspaceOverlay.style.backgroundColor=currentLanguage==='fr'?'rgba(0,0,0,.42)':'rgba(0,0,0,.20)';
  const scopedLanguageCopy={
+  'education-heading':['Education','Formation'],
+  'edu-1-year':['2025–2026','2025–2026'],
+  'edu-1-school':['University of Orléans','Université d’Orléans'],
+  'edu-1-degree':['French as a Foreign Language','Français langue étrangère'],
+  'edu-1-field':['DELF B2','DELF B2'],
+  'edu-2-year':['2022–2024','2022–2024'],
+  'edu-2-school':['University of Toulon','Université de Toulon'],
+  'edu-2-degree':['Master 2 in Digital and Editorial Communication','Master 2 Communication digitale et éditoriale'],
+  'edu-3-year':['2021–2023','2021–2023'],
+  'edu-3-school':['National University of Dnipro','Université nationale de Dnipro'],
+  'edu-3-degree':['Master 2 in Advertising and Public Relations','Master 2 Publicité et relations publiques'],
+  'edu-3-field':['Second year completed remotely','Deuxième année suivie à distance'],
+  'edu-4-year':['2017–2021','2017–2021'],
+  'edu-4-school':['National University of Dnipro','Université nationale de Dnipro'],
+  'edu-4-degree':['Bachelor’s Degree','Licence'],
+  'edu-4-field':['Business Economics','Économie d’entreprise'],
   'strategy-step-1':['Business Discovery','Découverte de l’entreprise'],
   'strategy-step-2':['Target Audience','Définition du public cible'],
   'strategy-step-3':['Competitor Analysis','Analyse de la concurrence'],
