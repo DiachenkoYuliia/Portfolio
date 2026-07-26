@@ -6,7 +6,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XBMLLRN8K8');
+    gtag('config', 'G-XBMLLRN8K8', { send_page_view: false });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -968,6 +968,31 @@ I also supported the promotion of the company’s services through organic conte
   </div>
   <script>
 const pageMap={home:'page-home',about:'page-about',social:'page-social',strategy:'page-strategy',graphic:'page-graphic',contact:'page-contact','case-reaco':'page-case-reaco','case-breathing':'page-case-breathing','case-radio':'page-case-radio','case-luna':'page-case-luna','case-poster':'page-case-poster','case-other':'page-case-other'};
+const analyticsPageNames={
+ home:'Home',about:'About',social:'Social Media',strategy:'Strategy',graphic:'Graphic Design',contact:'Contact',
+ 'case-reaco':'UnivArena','case-breathing':'Breathing Academy','case-radio':'Radio Campus Orléans',
+ 'case-luna':'Luna Rossa','case-poster':'Poster Design','case-other':'Other Projects'
+};
+let lastAnalyticsHash='';
+function gaTrack(eventName,parameters={}){
+ if(typeof window.gtag!=='function')return;
+ window.gtag('event',eventName,{...parameters,language:document.documentElement.lang||'fr'});
+}
+function currentAnalyticsHash(){return window.location.hash.replace('#','')||'home'}
+function currentProjectName(){return analyticsPageNames[currentAnalyticsHash()]||'Portfolio'}
+function mediaAnalyticsName(element){
+ if(!element)return'Unknown visual';
+ const source=element.currentSrc||element.src||'';
+ const filename=source.split('/').pop().split('?')[0].split('#')[0];
+ return(element.alt||element.getAttribute('aria-label')||filename||'Visual').trim().slice(0,100);
+}
+function trackPageView(hash){
+ if(lastAnalyticsHash===hash)return;
+ lastAnalyticsHash=hash;
+ const pageName=analyticsPageNames[hash]||'Home';
+ gaTrack('page_view',{page_title:`${pageName} — Yuliia Diachenko`,page_location:window.location.href,page_name:pageName});
+ if(hash.startsWith('case-'))gaTrack('case_open',{case_name:pageName});
+}
 function navigate(){
 const hash=window.location.hash.replace('#','')||'home';
 document.querySelectorAll('.page-section').forEach(s=>{s.classList.remove('active');s.style.opacity='0'});
@@ -976,10 +1001,45 @@ if(target){target.classList.add('active');setTimeout(()=>{target.style.opacity='
 document.querySelectorAll('[data-nav]').forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+hash));
 window.scrollTo(0,0);
 document.getElementById('mobile-menu').classList.add('hidden');
+trackPageView(pageMap[hash]?hash:'home');
 }
 window.addEventListener('hashchange',navigate);
 navigate();
 document.getElementById('mobile-menu-btn').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.toggle('hidden')});
+
+document.addEventListener('click',event=>{
+ const link=event.target.closest('a[href]');
+ if(!link)return;
+ const href=link.getAttribute('href')||'';
+ const label=(link.getAttribute('aria-label')||link.textContent||'Link').trim().replace(/\s+/g,' ').slice(0,100);
+ if(/\.pdf(?:$|[?#])/i.test(href)||/cv-/i.test(href)){
+  gaTrack('cv_click',{link_text:label,link_url:link.href});
+  return;
+ }
+ if(href.startsWith('mailto:')){
+  gaTrack('contact_link_click',{contact_method:'email',link_text:label});
+  return;
+ }
+ if(!/^https?:/i.test(href))return;
+ const host=new URL(link.href,window.location.href).hostname.replace(/^www\./,'');
+ const socialPlatforms={
+  'instagram.com':'Instagram',
+  'linkedin.com':'LinkedIn',
+  'tiktok.com':'TikTok'
+ };
+ if(socialPlatforms[host]){
+  gaTrack('social_click',{platform:socialPlatforms[host],content_name:label,link_url:link.href,project_name:currentProjectName()});
+ }else if(host!==window.location.hostname){
+  gaTrack('external_link_click',{link_domain:host,link_text:label,link_url:link.href,project_name:currentProjectName()});
+ }
+});
+document.addEventListener('play',event=>{
+ const video=event.target.closest('video');
+ if(!video)return;
+ const source=video.currentSrc||video.querySelector('source')?.src||'';
+ const filename=source.split('/').pop().split('?')[0].split('#')[0]||'Video';
+ gaTrack('video_play',{video_name:filename,project_name:currentProjectName()});
+},true);
 
 document.querySelectorAll('[data-cat-link]').forEach(link=>{
 link.addEventListener('click',e=>{e.preventDefault();const target=document.querySelector(link.getAttribute('href'));if(target)target.scrollIntoView({behavior:'smooth',block:'start'})});
@@ -992,8 +1052,8 @@ document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 const featureTrack=document.getElementById('feature-track');let fIdx=0;
 function getSlideCount(){if(window.innerWidth<640)return 1;if(window.innerWidth<1024)return 2;return 3}
 function updateCarousel(){featureTrack.style.transform=`translateX(-${fIdx*(100/getSlideCount())}%)`}
-document.getElementById('carousel-next').addEventListener('click',()=>{fIdx=Math.min(fIdx+1,6-getSlideCount());updateCarousel()});
-document.getElementById('carousel-prev').addEventListener('click',()=>{fIdx=Math.max(fIdx-1,0);updateCarousel()});
+document.getElementById('carousel-next').addEventListener('click',()=>{fIdx=Math.min(fIdx+1,6-getSlideCount());updateCarousel();gaTrack('carousel_navigate',{carousel_name:'Featured Work',direction:'next'})});
+document.getElementById('carousel-prev').addEventListener('click',()=>{fIdx=Math.max(fIdx-1,0);updateCarousel();gaTrack('carousel_navigate',{carousel_name:'Featured Work',direction:'previous'})});
 window.addEventListener('resize',()=>{fIdx=Math.min(fIdx,6-getSlideCount());updateCarousel()});
 
 // Generic carousel mover
@@ -1008,6 +1068,7 @@ carouselState[trackId]+=dir;
 if(carouselState[trackId]>max)carouselState[trackId]=0;
 if(carouselState[trackId]<0)carouselState[trackId]=max;
 el.style.transform=`translateX(-${carouselState[trackId]*(100/visible)}%)`;
+gaTrack('carousel_navigate',{carousel_name:trackId,direction:dir>0?'next':'previous'});
 }
 
 // Mobile carousels for rows of three vertical visuals (two visible at once)
@@ -1023,6 +1084,7 @@ mobileTrioState[trackId]=(mobileTrioState[trackId]||0)+dir;
 if(mobileTrioState[trackId]>max)mobileTrioState[trackId]=0;
 if(mobileTrioState[trackId]<0)mobileTrioState[trackId]=max;
 track.style.transform=`translateX(-${mobileTrioState[trackId]*(100/visible)}%)`;
+gaTrack('carousel_navigate',{carousel_name:trackId,direction:dir>0?'next':'previous',project_name:currentProjectName()});
 }
 window.addEventListener('resize',()=>{
 if(window.innerWidth>640){
@@ -1046,6 +1108,7 @@ const step=track.children[0].getBoundingClientRect().width+gap;
 track.style.transform=`translateX(-${galleryState[galleryId]*step}px)`;
 const counter=document.getElementById(galleryId.replace('-gallery','-counter'));
 if(counter)counter.textContent=galleryState[galleryId]+1;
+gaTrack('carousel_navigate',{carousel_name:galleryId,direction:dir>0?'next':'previous',project_name:currentProjectName()});
 }
 
 // Stories carousel with infinite loop
@@ -1058,6 +1121,7 @@ storiesIdx+=dir;
 if(storiesIdx<0)storiesIdx=total-visible;
 if(storiesIdx>total-visible)storiesIdx=0;
 el.style.transform=`translateX(-${storiesIdx*(100/visible)}%)`;
+gaTrack('carousel_navigate',{carousel_name:'stories-track',direction:dir>0?'next':'previous'});
 }
 
 // Lightbox
@@ -1080,6 +1144,11 @@ wrap.classList.toggle('is-scrollable',lbScrollable);
 wrap.scrollTop=0;
 document.getElementById('lightbox-img').src=lbImages[lbIdx].src;
 document.getElementById('lightbox').classList.add('open');
+gaTrack('visual_open',{
+ project_name:currentProjectName(),
+ visual_name:mediaAnalyticsName(lbImages[lbIdx]),
+ visual_type:lbScrollable?'newsletter':'image'
+});
 }
 }
 function closeLightbox(e){if(e.target.closest('button')||e.target===document.getElementById('lightbox')){document.getElementById('lightbox').classList.remove('open')}}
@@ -1098,6 +1167,7 @@ async function handleForm(e,form){
   const result=await response.json().catch(()=>({}));
   if(!response.ok||result.success===false)throw new Error(result.message||'Submission failed');
   form.reset();btn.textContent=translatePhrase('Sent ✓');status.textContent=translatePhrase('Thank you. Your message has been sent.');status.style.color='#E8A838';
+  gaTrack('contact_submit',{form_name:'Portfolio contact form'});
   setTimeout(()=>{btn.textContent=orig;btn.disabled=false},3500);
  }catch(error){
   btn.textContent=orig;btn.disabled=false;status.textContent=translatePhrase('The message could not be sent. Please email me at yuliia.diachenko.dp@gmail.com.');status.style.color='#fca5a5';
@@ -1492,7 +1562,11 @@ function applyLanguage(language){
  document.querySelectorAll('[data-language-toggle]').forEach(button=>{button.textContent=currentLanguage==='fr'?'FR':'EN';button.setAttribute('aria-label',currentLanguage==='fr'?'Switch to English':'Passer au français')});
  localStorage.setItem('portfolio-language-v2',currentLanguage);
 }
-document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEventListener('click',()=>applyLanguage(currentLanguage==='fr'?'en':'fr')));
+document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEventListener('click',()=>{
+ const nextLanguage=currentLanguage==='fr'?'en':'fr';
+ gaTrack('language_change',{previous_language:currentLanguage,new_language:nextLanguage});
+ applyLanguage(nextLanguage);
+}));
 window.matchMedia('(max-width: 640px)').addEventListener('change',updateAboutWorkspaceImage);
 applyLanguage(localStorage.getItem('portfolio-language-v2')||'fr');
 
