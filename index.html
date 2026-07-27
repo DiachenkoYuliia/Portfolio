@@ -984,14 +984,17 @@ function mediaAnalyticsName(element){
  if(!element)return'Unknown visual';
  const source=element.currentSrc||element.src||'';
  const filename=source.split('/').pop().split('?')[0].split('#')[0];
- return(element.alt||element.getAttribute('aria-label')||filename||'Visual').trim().slice(0,100);
+ return decodeURIComponent(filename||element.alt||element.getAttribute('aria-label')||'Visual').trim().slice(0,100);
+}
+function mediaAnalyticsLabel(element){
+ return(element?.alt||element?.getAttribute('aria-label')||mediaAnalyticsName(element)).trim().slice(0,100);
 }
 function trackPageView(hash){
  if(lastAnalyticsHash===hash)return;
  lastAnalyticsHash=hash;
  const pageName=analyticsPageNames[hash]||'Home';
  gaTrack('page_view',{page_title:`${pageName} — Yuliia Diachenko`,page_location:window.location.href,page_name:pageName});
- if(hash.startsWith('case-'))gaTrack('case_open',{case_name:pageName});
+ if(hash.startsWith('case-'))gaTrack('case_open',{case_name:pageName,element_name:pageName,element_type:'case'});
 }
 function navigate(){
 const hash=window.location.hash.replace('#','')||'home';
@@ -1013,7 +1016,7 @@ document.addEventListener('click',event=>{
  const href=link.getAttribute('href')||'';
  const label=(link.getAttribute('aria-label')||link.textContent||'Link').trim().replace(/\s+/g,' ').slice(0,100);
  if(/\.pdf(?:$|[?#])/i.test(href)||/cv-/i.test(href)){
-  gaTrack('cv_click',{link_text:label,link_url:link.href});
+  gaTrack('cv_click',{link_text:label,link_url:link.href,element_name:decodeURIComponent(href.split('/').pop().split('?')[0]||'CV'),element_type:'document'});
   return;
  }
  if(href.startsWith('mailto:')){
@@ -1028,7 +1031,7 @@ document.addEventListener('click',event=>{
   'tiktok.com':'TikTok'
  };
  if(socialPlatforms[host]){
-  gaTrack('social_click',{platform:socialPlatforms[host],content_name:label,link_url:link.href,project_name:currentProjectName()});
+  gaTrack('social_click',{platform:socialPlatforms[host],content_name:label,link_url:link.href,project_name:currentProjectName(),element_name:label,element_type:'social_link'});
  }else if(host!==window.location.hostname){
   gaTrack('external_link_click',{link_domain:host,link_text:label,link_url:link.href,project_name:currentProjectName()});
  }
@@ -1038,7 +1041,7 @@ document.addEventListener('play',event=>{
  if(!video)return;
  const source=video.currentSrc||video.querySelector('source')?.src||'';
  const filename=source.split('/').pop().split('?')[0].split('#')[0]||'Video';
- gaTrack('video_play',{video_name:filename,project_name:currentProjectName()});
+ gaTrack('video_play',{video_name:filename,project_name:currentProjectName(),element_name:filename,element_type:'video'});
 },true);
 
 document.querySelectorAll('[data-cat-link]').forEach(link=>{
@@ -1144,10 +1147,15 @@ wrap.classList.toggle('is-scrollable',lbScrollable);
 wrap.scrollTop=0;
 document.getElementById('lightbox-img').src=lbImages[lbIdx].src;
 document.getElementById('lightbox').classList.add('open');
+const openedVisual=lbImages[lbIdx];
+const openedVisualName=mediaAnalyticsName(openedVisual);
 gaTrack('visual_open',{
  project_name:currentProjectName(),
- visual_name:mediaAnalyticsName(lbImages[lbIdx]),
- visual_type:lbScrollable?'newsletter':'image'
+ visual_name:openedVisualName,
+ visual_label:mediaAnalyticsLabel(openedVisual),
+ visual_type:lbScrollable?'newsletter':'image',
+ element_name:openedVisualName,
+ element_type:lbScrollable?'newsletter':'image'
 });
 }
 }
