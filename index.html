@@ -63,6 +63,14 @@ html{scroll-behavior:smooth}
   .strategy-process-flow .process-step>div{width:50px!important;height:50px!important;margin:0!important;background:#090909;box-shadow:0 0 0 6px #090909}
   .strategy-process-flow .process-step p{text-align:left;font-size:.82rem!important;line-height:1.35;white-space:normal}
 }
+.about-shortcut-person{display:none}
+@media(min-width:641px) and (max-width:1024px){
+  .about-shortcut-card{min-height:460px}
+  .about-shortcut-person{display:block;position:absolute;right:0;bottom:0;z-index:1;width:48%;height:100%;background-image:url('media/about-workspace-fr.png');background-repeat:no-repeat;background-position:left center;background-size:200% auto;pointer-events:none}
+  .about-shortcut-content{position:relative;z-index:2}
+  .about-shortcut-copy{width:54%;max-width:54%!important;padding-right:1rem}
+  .about-shortcut-copy h2{font-size:2.5rem!important;line-height:1.05}
+}
 .collab-logo{transition:transform 0.3s ease,opacity 0.3s ease;opacity:0.7}
 .collab-logo:hover{transform:scale(1.02);opacity:1}
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;flex-direction:column}
@@ -278,11 +286,12 @@ html{scroll-behavior:smooth}
     </div>
    </div><!-- About shortcut -->
    <section class="max-w-6xl mx-auto px-6 pb-24 fade-in" aria-label="About me">
-    <a href="#about" class="group relative flex min-h-[440px] items-end overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-10">
+    <a href="#about" class="about-shortcut-card group relative flex min-h-[440px] items-end overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-6 md:p-10">
      <img data-template-id="about-workspace-img" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85" alt="Creative professional at work">
      <div data-template-id="about-workspace-overlay" class="absolute inset-0 bg-black/20 transition-colors duration-300"></div>
-     <div class="relative grid w-full gap-6 md:grid-cols-[1fr_auto] md:items-end">
-      <div class="max-w-2xl">
+     <span class="about-shortcut-person" aria-hidden="true"></span>
+     <div class="about-shortcut-content relative grid w-full gap-6 md:grid-cols-[1fr_auto] md:items-end">
+      <div class="about-shortcut-copy max-w-2xl">
        <p class="text-sm uppercase tracking-[0.22em] accent mb-4">Behind the work</p>
        <h2 class="text-4xl md:text-6xl font-black tracking-tight mb-4">The person behind<br>the creative work.</h2>
        <p class="text-white/75 leading-relaxed max-w-xl">Discover my background, creative approach and the values I bring to every project.</p>
