@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Golden D — soft light</title>
+  <desc id="desc">The compact cursive D with a soft creamy golden light.</desc>
+  <defs>
+    <linearGradient id="g" x1="128" y1="118" x2="398" y2="397" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1BC"/>
+      <stop offset=".38" stop-color="#F4C75F"/>
+      <stop offset=".68" stop-color="#E8A838"/>
+      <stop offset="1" stop-color="#CF8425"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="210" fill="#111318"/>
+  <g fill="none" stroke="url(#g)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M143 350C116 317 113 270 131 225C155 164 208 128 268 126C332 124 385 159 402 215C425 291 375 365 291 383"/>
+    <path d="M143 350C169 378 207 382 233 359C258 336 264 299 260 261C255 218 240 175 216 139"/>
+  </g>
+</svg>
