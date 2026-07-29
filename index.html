@@ -76,6 +76,13 @@ html{scroll-behavior:smooth}
 .page-contents-nav .cat-pill{background:rgba(10,10,10,.72);backdrop-filter:blur(8px)}
 .page-contents-target{scroll-margin-top:7rem}
 @media(max-width:640px){.page-contents-nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:1rem 1rem .25rem;scrollbar-width:none}.page-contents-nav::-webkit-scrollbar{display:none}.page-contents-nav .cat-pill{flex:0 0 auto}}
+@media(min-width:641px){
+  #page-social .page-contents-nav{padding:3rem 1.5rem 0}
+  #page-social .page-contents-nav+div{padding-top:3rem}
+  #page-strategy>div:first-child{padding-bottom:3rem}
+  #page-strategy .page-contents-nav{padding:1rem 1.5rem 0}
+}
+#page-strategy>.max-w-6xl.py-24{padding-top:4rem!important;padding-bottom:4rem!important}
 .carousel-wrap{overflow:hidden;position:relative}
 .carousel-inner{display:flex;transition:transform 0.5s ease}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;color:white;cursor:pointer;transition:background 0.3s;z-index:10}
@@ -1451,7 +1458,7 @@ addPageContentsNav('page-about',[
 
 addPageContentsNav('page-social',[
  ['Instagram Reels','social-reels','[data-template-id="social-reels-heading"]'],
- ['Instagram Stories','social-stories','[data-template-id="social-stories-heading"]'],
+ ['Stories','social-stories','[data-template-id="social-stories-heading"]'],
  ['Featured Video','social-featured-video','[data-template-id="social-video-heading"]'],
  ['Email Marketing','social-email-marketing','[data-template-id="social-email-heading"]'],
  ['Content Creation','social-content-creation','[data-template-id="social-creation-heading"]']
@@ -1463,26 +1470,6 @@ addPageContentsNav('page-strategy',[
  ['Strategy Documents','strategy-documents','[data-template-id="strategy-docs-heading"]'],
  ['What I Deliver','strategy-deliverables','[data-template-id="strategy-deliver-heading"]']
 ],':scope > div:first-child');
-
-caseOrder.forEach(caseId=>{
- const key=caseId.replace('case-','');
- const pageId=`page-${caseId}`;
- if(caseId==='case-other'){
-  addPageContentsNav(pageId,[
-   ['Creative Projects','other-project-media','.case-media'],
-   ['My Approach','other-project-approach','h2']
-  ],'h1');
-  return;
- }
- addPageContentsNav(pageId,[
-  ['Project Media',`${key}-project-media`,'.case-media'],
-  ['Project Overview',`${key}-project-overview`,`[data-template-id="case-${key}-overview-label"]`],
-  ['Challenge',`${key}-challenge`,`[data-template-id="case-${key}-challenge-label"]`],
-  ['My Role',`${key}-role`,`[data-template-id="case-${key}-role-label"]`],
-  ['Process',`${key}-process`,`[data-template-id="case-${key}-process-label"]`],
-  ['Final Outcome',`${key}-outcome`,`[data-template-id="case-${key}-outcome-label"]`]
- ],'h1');
-});
 
 // English / French interface
 const frenchTranslations={
