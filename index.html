@@ -1669,7 +1669,7 @@ function translatePhrase(text){return currentLanguage==='fr'?(frenchTranslations
 function updateAboutWorkspaceImage(){
  const aboutWorkspace=document.querySelector('[data-template-id="about-workspace-img"]');
  if(!aboutWorkspace)return;
- const languageImage=window.matchMedia('(max-width: 640px)').matches?'about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
+ const languageImage=window.matchMedia('(max-width: 1024px)').matches?'about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
  if(aboutWorkspace.getAttribute('src')!==languageImage)aboutWorkspace.setAttribute('src',languageImage);
 }
 function applyLanguage(language){
@@ -1721,7 +1721,7 @@ document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEv
  gaTrack('language_change',{previous_language:currentLanguage,new_language:nextLanguage});
  applyLanguage(nextLanguage);
 }));
-window.matchMedia('(max-width: 640px)').addEventListener('change',updateAboutWorkspaceImage);
+window.matchMedia('(max-width: 1024px)').addEventListener('change',updateAboutWorkspaceImage);
 applyLanguage(localStorage.getItem('portfolio-language-v2')||'fr');
 
 lucide.createIcons();
