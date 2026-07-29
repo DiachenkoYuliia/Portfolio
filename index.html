@@ -74,6 +74,8 @@ html{scroll-behavior:smooth}
 .cat-pill:hover,.cat-pill.active{color:#E8A838;border-color:#E8A838}
 .page-contents-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;max-width:72rem;margin:0 auto;padding:1.5rem 1.5rem 0}
 .page-contents-nav .cat-pill{background:rgba(10,10,10,.72);backdrop-filter:blur(8px)}
+.case-desktop-contents-nav{display:none!important}
+@media(min-width:1025px){.case-desktop-contents-nav{display:flex!important}}
 .page-contents-target{scroll-margin-top:7rem}
 @media(max-width:640px){.page-contents-nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding:1rem 1rem .25rem;scrollbar-width:none}.page-contents-nav::-webkit-scrollbar{display:none}.page-contents-nav .cat-pill{flex:0 0 auto}}
 @media(min-width:641px){
@@ -1111,10 +1113,20 @@ window.addEventListener('resize',()=>{fIdx=Math.min(fIdx,6-getSlideCount());upda
 
 // Generic carousel mover
 const carouselState={};
+function getCarouselVisible(trackId){
+if(trackId==='reels-track')return window.innerWidth<768?2:3;
+if(trackId==='luna-video-track'){
+if(window.innerWidth<=640)return 1;
+if(window.innerWidth<=1024)return 2;
+return 3;
+}
+return window.innerWidth<768?1:3;
+}
 function moveCarousel(trackId,dir){
 const el=document.getElementById(trackId);
+if(!el)return;
 const children=el.children;
-const visible=trackId==='reels-track'?(window.innerWidth<768?2:3):(window.innerWidth<768?1:3);
+const visible=getCarouselVisible(trackId);
 const max=Math.max(0,children.length-visible);
 if(!carouselState[trackId])carouselState[trackId]=0;
 carouselState[trackId]+=dir;
@@ -1123,6 +1135,13 @@ if(carouselState[trackId]<0)carouselState[trackId]=max;
 el.style.transform=`translateX(-${carouselState[trackId]*(100/visible)}%)`;
 gaTrack('carousel_navigate',{carousel_name:trackId,direction:dir>0?'next':'previous'});
 }
+window.addEventListener('resize',()=>{
+Object.keys(carouselState).forEach(trackId=>{
+carouselState[trackId]=0;
+const track=document.getElementById(trackId);
+if(track)track.style.transform='';
+});
+});
 
 // Mobile carousels for rows of three vertical visuals (two visible at once)
 const mobileTrioState={};
@@ -1472,6 +1491,16 @@ addPageContentsNav('page-strategy',[
  ['Strategy Documents','strategy-documents','[data-template-id="strategy-docs-heading"]'],
  ['What I Deliver','strategy-deliverables','[data-template-id="strategy-deliver-heading"]']
 ],':scope > div:first-child');
+
+addPageContentsNav('page-case-luna',[
+ ['Project Media','luna-project-media','.case-media'],
+ ['Project Overview','luna-project-overview','[data-template-id="case-luna-overview-label"]'],
+ ['Challenge','luna-challenge','[data-template-id="case-luna-challenge-label"]'],
+ ['My Role','luna-role','[data-template-id="case-luna-role-label"]'],
+ ['Process','luna-process','[data-template-id="case-luna-process-label"]'],
+ ['Final Outcome','luna-outcome','[data-template-id="case-luna-outcome-label"]']
+],'h1');
+document.querySelector('#page-case-luna .page-contents-nav')?.classList.add('case-desktop-contents-nav');
 
 // English / French interface
 const frenchTranslations={
