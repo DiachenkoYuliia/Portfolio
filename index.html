@@ -1163,8 +1163,22 @@ gaTrack('visual_open',{
 }
 }
 function closeLightbox(e){if(e.target.closest('button')||e.target===document.getElementById('lightbox')){document.getElementById('lightbox').classList.remove('open')}}
-function lbPrev(e){e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLightbox()}
-function lbNext(e){e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx+1)%lbImages.length;showLightbox()}
+function lbPrev(e){if(e)e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;showLightbox()}
+function lbNext(e){if(e)e.stopPropagation();if(lbImages.length<=1)return;lbIdx=(lbIdx+1)%lbImages.length;showLightbox()}
+document.addEventListener('keydown',event=>{
+ const lightbox=document.getElementById('lightbox');
+ if(!lightbox.classList.contains('open'))return;
+ if(event.key==='ArrowLeft'){
+  event.preventDefault();
+  lbPrev();
+ }else if(event.key==='ArrowRight'){
+  event.preventDefault();
+  lbNext();
+ }else if(event.key==='Escape'){
+  event.preventDefault();
+  lightbox.classList.remove('open');
+ }
+});
 
 async function handleForm(e,form){
  e.preventDefault();
