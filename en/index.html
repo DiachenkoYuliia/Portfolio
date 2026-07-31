@@ -1370,7 +1370,10 @@ const optimizedMedia={
  '../media/ukraine-charity-1.png':'ukraine-charity-1.webp',
  '../media/vector-1.png':'vector-1.webp'
 };
-const optimizedPath=src=>optimizedMedia[src]||src;
+const optimizedPath=src=>{
+ const optimized=optimizedMedia[src];
+ return optimized?src.replace(/[^/]+$/,optimized):src;
+};
 const applyOptimizedImages=root=>root.querySelectorAll('img[src]').forEach(img=>{
  const original=img.getAttribute('src');
  const optimized=optimizedPath(original);
@@ -1415,9 +1418,14 @@ const automaticMedia={
 Object.entries(automaticMedia).forEach(([templateId,path])=>{
  const img=document.querySelector(`[data-template-id="${templateId}"]`);
  if(!img)return;
- const fallback=img.getAttribute('src');
- img.onerror=()=>{img.onerror=null;img.src=fallback};
- img.src=optimizedPath(path);
+ const placeholderFallback=img.getAttribute('src');
+ const optimized=optimizedPath(path);
+ let triedOriginal=false;
+ img.onerror=()=>{
+  if(!triedOriginal&&optimized!==path){triedOriginal=true;img.src=path;return}
+  img.onerror=null;img.src=placeholderFallback;
+ };
+ img.src=optimized;
 });
 const featuredPreview=document.querySelector('#featured-video-container img');
 if(featuredPreview){
