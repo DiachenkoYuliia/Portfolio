@@ -10,6 +10,10 @@
   </script>
   <meta charset="UTF-8">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="canonical" href="https://diachenkoyuliia.github.io/Portfolio/">
+  <link rel="alternate" hreflang="fr" href="https://diachenkoyuliia.github.io/Portfolio/fr/">
+  <link rel="alternate" hreflang="en" href="https://diachenkoyuliia.github.io/Portfolio/en/">
+  <link rel="alternate" hreflang="x-default" href="https://diachenkoyuliia.github.io/Portfolio/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio créatif — Yuliia Diachenko</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -1718,11 +1722,22 @@ const frenchTranslations={
 };
 const englishTranslations=Object.fromEntries(Object.entries(frenchTranslations).map(([en,fr])=>[fr,en]));
 let currentLanguage='fr';
+function languageFromPath(){
+ const path=window.location.pathname.toLowerCase();
+ return /\/en\/?(?:index\.html)?$/.test(path)?'en':'fr';
+}
+function localizedLanguageUrl(language){
+ const isLocalizedPath=/\/(?:fr|en)\/?(?:index\.html)?$/i.test(window.location.pathname);
+ const target=new URL(isLocalizedPath?`../${language}/`:`${language}/`,window.location.href);
+ target.search=window.location.search;
+ target.hash=window.location.hash;
+ return target.href;
+}
 function translatePhrase(text){return currentLanguage==='fr'?(frenchTranslations[text]||text):(englishTranslations[text]||text)}
 function updateAboutWorkspaceImage(){
  const aboutWorkspace=document.querySelector('[data-template-id="about-workspace-img"]');
  if(!aboutWorkspace)return;
- const languageImage=window.matchMedia('(max-width: 1024px)').matches?'about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
+ const languageImage=window.matchMedia('(max-width: 1024px)').matches?'media/about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
  if(aboutWorkspace.getAttribute('src')!==languageImage)aboutWorkspace.setAttribute('src',languageImage);
 }
 function applyLanguage(language){
@@ -1772,10 +1787,10 @@ function applyLanguage(language){
 document.querySelectorAll('[data-language-toggle]').forEach(button=>button.addEventListener('click',()=>{
  const nextLanguage=currentLanguage==='fr'?'en':'fr';
  gaTrack('language_change',{previous_language:currentLanguage,new_language:nextLanguage});
- applyLanguage(nextLanguage);
+ window.location.assign(localizedLanguageUrl(nextLanguage));
 }));
 window.matchMedia('(max-width: 1024px)').addEventListener('change',updateAboutWorkspaceImage);
-applyLanguage(localStorage.getItem('portfolio-language-v2')||'fr');
+applyLanguage(languageFromPath());
 
 lucide.createIcons();
 </script>
