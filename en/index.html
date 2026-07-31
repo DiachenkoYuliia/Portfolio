@@ -1372,7 +1372,7 @@ const optimizedMedia={
 };
 const optimizedPath=src=>{
  const optimized=optimizedMedia[src];
- return optimized?src.replace(/[^/]+$/,optimized):src;
+ return optimized?src.replace(/media\/[^/]+$/,optimized):src;
 };
 const applyOptimizedImages=root=>root.querySelectorAll('img[src]').forEach(img=>{
  const original=img.getAttribute('src');
