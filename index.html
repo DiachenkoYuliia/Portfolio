@@ -15,7 +15,7 @@
   <link rel="alternate" hreflang="en" href="https://diachenkoyuliia.github.io/Portfolio/en/">
   <link rel="alternate" hreflang="x-default" href="https://diachenkoyuliia.github.io/Portfolio/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio créatif — Yuliia Diachenko</title>
+  <title>Portfolio — Yuliia Diachenko</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700;900&amp;display=swap" rel="stylesheet">
@@ -1536,7 +1536,7 @@ const frenchTranslations={
  "Page contents":"Sommaire de la page",
  "Project Media":"Médias du projet",
  "Creative Projects":"Projets créatifs",
- "Creative Portfolio":"Portfolio créatif",
+ "Creative Portfolio":"Portfolio",
  "Home":"Accueil",
  "About":"À propos",
  "Social Media":"Réseaux sociaux",
@@ -1759,7 +1759,7 @@ function applyLanguage(language){
  nodes.forEach(node=>{if(['SCRIPT','STYLE'].includes(node.parentElement?.tagName))return;const raw=node.nodeValue;const original=raw.trim();const key=normalizeText(original);if(normalizedSource[key])node.nodeValue=raw.replace(original,normalizedSource[key])});
  document.querySelectorAll('[placeholder],[title],[aria-label]').forEach(el=>['placeholder','title','aria-label'].forEach(attr=>{const value=el.getAttribute(attr);if(value&&source[value])el.setAttribute(attr,source[value])}));
  document.documentElement.lang=currentLanguage;
- document.title=currentLanguage==='fr'?'Portfolio créatif — Yuliia Diachenko':'Creative Portfolio — Yuliia Diachenko';
+ document.title='Portfolio — Yuliia Diachenko';
   updateAboutWorkspaceImage();
  const aboutWorkspaceOverlay=document.querySelector('[data-template-id="about-workspace-overlay"]');
  if(aboutWorkspaceOverlay)aboutWorkspaceOverlay.style.backgroundColor=currentLanguage==='fr'?'rgba(0,0,0,.42)':'rgba(0,0,0,.20)';
