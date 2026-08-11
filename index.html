@@ -1520,15 +1520,16 @@ addPageContentsNav('page-strategy',[
  ['What I Deliver','strategy-deliverables','[data-template-id="strategy-deliver-heading"]']
 ],':scope > div:first-child');
 
-addPageContentsNav('page-case-luna',[
- ['Project Media','luna-project-media','.case-media'],
- ['Project Overview','luna-project-overview','[data-template-id="case-luna-overview-label"]'],
- ['Challenge','luna-challenge','[data-template-id="case-luna-challenge-label"]'],
- ['My Role','luna-role','[data-template-id="case-luna-role-label"]'],
- ['Process','luna-process','[data-template-id="case-luna-process-label"]'],
- ['Final Outcome','luna-outcome','[data-template-id="case-luna-outcome-label"]']
-],'h1');
-document.querySelector('#page-case-luna .page-contents-nav')?.classList.add('case-desktop-contents-nav');
+function addCaseSummaryNav(caseId){
+ addPageContentsNav(`page-case-${caseId}`,[
+  ['Project Overview',`${caseId}-project-overview`,`[data-template-id="case-${caseId}-overview-label"]`],
+  ['My Role',`${caseId}-role`,`[data-template-id="case-${caseId}-role-label"]`],
+  ['Final Outcome',`${caseId}-outcome`,`[data-template-id="case-${caseId}-outcome-label"]`]
+ ],'h1');
+ document.querySelector(`#page-case-${caseId} .page-contents-nav`)?.classList.add('case-summary-nav');
+}
+
+['radio','breathing','reaco','luna','poster'].forEach(addCaseSummaryNav);
 
 // English / French interface
 const frenchTranslations={
