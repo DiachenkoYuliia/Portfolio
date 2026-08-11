@@ -1745,7 +1745,7 @@ function translatePhrase(text){return currentLanguage==='fr'?(frenchTranslations
 function updateAboutWorkspaceImage(){
  const aboutWorkspace=document.querySelector('[data-template-id="about-workspace-img"]');
  if(!aboutWorkspace)return;
- const languageImage=window.matchMedia('(max-width: 1024px)').matches?'media/about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
+ const languageImage=window.matchMedia('(max-width: 1024px)').matches?'about-workspace-mob.png':(currentLanguage==='fr'?'media/about-workspace-fr.png':'media/about-workspace.png');
  if(aboutWorkspace.getAttribute('src')!==languageImage)aboutWorkspace.setAttribute('src',languageImage);
 }
 function applyLanguage(language){
